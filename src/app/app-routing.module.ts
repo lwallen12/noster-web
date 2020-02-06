@@ -8,12 +8,13 @@ import { WorldSeriesComponent } from './world-series/world-series.component';
 import { AuthComponent } from './auth/auth.component';
 
 const routes: Routes = [
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent, children: [
     {path: 'browse', component: BrowseComponent},
-  {path: 'presidentialprediction', component: PresidentialPredictionComponent},
-  {path: 'scores', component: ScoresComponent},
-  {path: 'worldseries', component: WorldSeriesComponent}
-  ]},
+    {path: 'presidentialprediction', component: PresidentialPredictionComponent},
+    {path: 'scores', component: ScoresComponent},
+    {path: 'worldseries', component: WorldSeriesComponent}
+    ]},
   {path: 'auth', component: AuthComponent}
 ];
 
