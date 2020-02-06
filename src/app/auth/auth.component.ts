@@ -4,6 +4,7 @@ import { MustMatch } from '../shared/must-match';
 import { Validators } from '@angular/forms';
 import { AuthService, Login } from '../auth.service';
 import { first } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -14,7 +15,7 @@ export class AuthComponent implements OnInit {
   submitted = false;
   loginMode = true;
   
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -39,8 +40,8 @@ export class AuthComponent implements OnInit {
         .pipe(first())
         .subscribe(
             data => {
-                console.log(data);
-                //this.router.navigate(['/inside']);
+                //console.log(data);
+                this.router.navigate(['/home']);
             },
             error => {
                 //this.error = error.message;
@@ -59,7 +60,11 @@ export class AuthComponent implements OnInit {
   }
 
   switchMode() {
+    this.loginForm.reset();
+    this.registerForm.reset();
+
     this.loginMode = !this.loginMode;
+    this.submitted = false;
   }
   
   ngOnInit() {

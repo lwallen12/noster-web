@@ -5,7 +5,7 @@
       <label for="email">
         Email:
       </label>
-        <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && loginForm.controls.email.errors }">
+        <input type="text" name="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && loginForm.controls.email.errors }">
       <div *ngIf="loginForm.controls.email.errors && submitted" class="invalid-feedback">
           <div *ngIf="loginForm.controls.email.errors?.required" class="text-danger">
               Email is required.
@@ -91,8 +91,8 @@
   <a class="btn btn-link" (click)="switchMode()">Login</a>
 </div>
 
-<div>Please, use a different password than say... your bank account. This app stores nothing sensitive and 
-  uses authentication, but I am no security expert.</div>
+<div class="text-danger"><strong>Please, use a different password than say... your bank account. This app stores nothing sensitive and 
+  uses authentication, but I am no security expert.</strong></div>
 
 </form>
 
