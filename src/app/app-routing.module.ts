@@ -6,13 +6,16 @@ import { PresidentialPredictionComponent } from './presidential-prediction/presi
 import { ScoresComponent } from './scores/scores.component';
 import { WorldSeriesComponent } from './world-series/world-series.component';
 import { AuthComponent } from './auth/auth.component';
+import { AuthGuard } from "./auth/auth-guard";
 
 const routes: Routes = [
-  {path: 'browse', component: BrowseComponent},
-  {path: 'home', component: HomeComponent},
-  {path: 'presidentialprediction', component: PresidentialPredictionComponent},
-  {path: 'scores', component: ScoresComponent},
-  {path: 'worldseries', component: WorldSeriesComponent},
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
+    {path: 'browse', component: BrowseComponent},
+    {path: 'presidentialprediction', component: PresidentialPredictionComponent},
+    {path: 'scores', component: ScoresComponent},
+    {path: 'worldseries', component: WorldSeriesComponent}
+    ]},
   {path: 'auth', component: AuthComponent}
 ];
 
