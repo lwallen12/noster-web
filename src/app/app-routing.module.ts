@@ -8,11 +8,12 @@ import { WorldSeriesComponent } from './world-series/world-series.component';
 import { AuthComponent } from './auth/auth.component';
 
 const routes: Routes = [
-  {path: 'browse', component: BrowseComponent},
-  {path: 'home', component: HomeComponent},
+  {path: 'home', component: HomeComponent, children: [
+    {path: 'browse', component: BrowseComponent},
   {path: 'presidentialprediction', component: PresidentialPredictionComponent},
   {path: 'scores', component: ScoresComponent},
-  {path: 'worldseries', component: WorldSeriesComponent},
+  {path: 'worldseries', component: WorldSeriesComponent}
+  ]},
   {path: 'auth', component: AuthComponent}
 ];
 
