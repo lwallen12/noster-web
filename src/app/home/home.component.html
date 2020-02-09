@@ -2,3 +2,4 @@
 <div class="container">
   <router-outlet></router-outlet>
 </div>
+<app-idle *ngIf="isIdle" [message]="idleState"></app-idle>

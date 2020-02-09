@@ -15,6 +15,8 @@ export class AuthComponent implements OnInit {
   submitted = false;
   loginMode = true;
   errorMessage;
+
+  loading = false;
   
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 
@@ -32,6 +34,9 @@ export class AuthComponent implements OnInit {
   });
 
   onSubmit() {
+
+    this.loading = true;
+
     let login: Login = {
       email: this.loginForm.value.email,
       password: this.loginForm.value.password
@@ -54,6 +59,8 @@ export class AuthComponent implements OnInit {
 
     console.warn(this.loginForm.value);
     console.log(this.loginForm);
+
+    this.loading = false;
   }
 
   onRegister() {

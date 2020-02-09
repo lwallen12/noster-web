@@ -15,8 +15,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { MomentModule } from 'angular2-moment';
+import { IdleComponent } from './modals/idle.component';
 
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
+import { LoadingComponent } from './modals/loading.component';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
     ScoresComponent,
     PresidentialPredictionComponent,
     WorldSeriesComponent,
-    AuthComponent
+    AuthComponent,
+    IdleComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

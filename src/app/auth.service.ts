@@ -50,9 +50,22 @@ getProtected() {
   return this.http.get<any>('http://localhost:57096/api/accounts/protected');
 }
 
-}
+refreshToken() {
 
-  
+  return this.http.post<any>("http://localhost:57096/api/accounts/refresh", null, {headers:{ 'Authorization': 'Bearer ' + this.getAuthorizationToken() }, 
+  responseType:'text' as 'json' })
+    .pipe(map(user => {
+      localStorage.setItem('currentUser', user);
+
+    this.currentUserSubject.next(user);
+    
+    console.log("new user should be: " + user);
+
+    return user;
+    }));
+  }
+
+}
 
 
 
