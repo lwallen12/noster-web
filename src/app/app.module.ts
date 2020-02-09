@@ -14,6 +14,9 @@ import { AuthComponent } from './auth/auth.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './auth/auth-interceptor';
+import { MomentModule } from 'angular2-moment';
+
+import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 
 
 @NgModule({
@@ -33,7 +36,9 @@ import { AuthInterceptor } from './auth/auth-interceptor';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgIdleKeepaliveModule.forRoot(),
+    MomentModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, 
     useClass: AuthInterceptor, multi: true}],

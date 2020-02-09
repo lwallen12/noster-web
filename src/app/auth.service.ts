@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class AuthService {
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.currentUserSubject = new BehaviorSubject<any>(localStorage.getItem('currentUser'));
     this.currentUser = this.currentUserSubject.asObservable();
 }
@@ -32,11 +33,27 @@ login(login: Login) {
   }));
 }
 
-  getAuthorizationToken() {
+logout() {
+  // remove user from local storage and set current user to null
+  localStorage.removeItem('currentUser');
+  this.currentUserSubject.next(null);
+
+  this.router.navigate(['/auth']); 
+}
+
+getAuthorizationToken() {
     return localStorage.getItem('currentUser');
   }
 
+//Just to test auth and intereptor work
+getProtected() {
+  return this.http.get<any>('http://localhost:57096/api/accounts/protected');
 }
+
+}
+
+  
+
 
 
 export class Login {

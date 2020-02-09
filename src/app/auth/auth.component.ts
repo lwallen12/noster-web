@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class AuthComponent implements OnInit {
   submitted = false;
   loginMode = true;
+  errorMessage;
   
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 
@@ -44,7 +45,9 @@ export class AuthComponent implements OnInit {
                 this.router.navigate(['/home']);
             },
             error => {
-                //this.error = error.message;
+                console.log(error);
+                this.errorMessage = error.message;
+                this.loginForm.value.password = '';
             });
 
     this.submitted = true;
