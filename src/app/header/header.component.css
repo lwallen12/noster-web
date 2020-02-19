@@ -6,3 +6,12 @@ app-bright {
     color: white;
     background-color: black;
 }
+
+.myBack {
+    background-color:navy;
+    opacity: 0.8; 
+}
+
+.myLink{
+    color: red;
+}

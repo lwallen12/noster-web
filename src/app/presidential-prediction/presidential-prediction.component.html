@@ -1,23 +1,28 @@
-<!-- <select id="cars">
-  <option value="volvo">Volvo</option>
-  <option selected="selected" value="saab">Saab</option>
-  <option value="opel">Opel</option>
-  <option value="audi">Audi</option>
-</select> -->
+
 <h1>Fill out your 2020 Presidential Election Prediction</h1>
+<h3>I apologize that this form lacks functionality. I started in early February and wanted to get something out here ASAP!</h3>
+<p>*Disclaimer: I am not trying to make a political statement with this prediction form, this is for fun and to grade your ability to 
+  correctly predict the <i><b>actual</b></i> outcome of the 2020 Presidential Election... not what you would <i><b>like</b></i> the outcome to be. I included
+  some pretty outlandish options (Zorp the Surveyor) if you want to be absolutely un-associated with any sort of political
+  leaning.
+</p>
 <form [formGroup]="predictionForm">
-  <h2>Incumbent Prediction</h2>
-  <div formGroupName="candidate1Info">
-    <!-- <div class="form-group">
-      <label for="candidate1">Incumbent:</label>
-      <input type="text" id="candidate1" formControlName="candidate1" class="form-control">  
-    </div> -->
+  <div formGroupName="candidate1Info" class="container">
+
+    <p>My goal (still in progress) is to allow any possible grade-able prediction. So if you are wondering why Donald Trump 
+      is not a given, what if he decided to one day this year he'd rather just pack up and go home? Who would be the
+      replacement? 
+    </p>
+
+
+    <h2>Incumbent Prediction</h2>
+    <hr>
+
     <div>
-      <label>Incumbent (Or Replacement):</label>
-      <div class="radio" *ngFor="let can of cans" (click)="checkOther()">
-        <input type="radio" formControlName="candidate1" [value]="can">{{ can }}
-      </div>
-    <input type="text" formControlName="c1Other" *ngIf="showOther">
+        <label>Incumbent (Or Replacement):</label>
+        <div class="radio" *ngFor="let can of cans">
+          <input type="radio" formControlName="candidate1" [value]="can">{{ can }}
+        </div>
     </div>
 
     <div>
@@ -37,32 +42,32 @@
     <div>
       <label>Number of Faithless Electorates:</label>
       <div>
-        <input type="number" min="0" formControlName="candidate1Faithless">
+        <input class="test" type="number" min="0" formControlName="candidate1Faithless">
       </div>
     </div>
 <hr>
 </div>
 
-<div formGroupName="candidate2Info">
+<div formGroupName="candidate2Info" class="container">
   <h2>Challenger Prediction</h2>
   <div>
     <label>Challenger:</label>
-    <div class="radio" *ngFor="let can of canTwos">
-      <input type="radio" formControlName="candidate2" [value]="can">{{ can }}
+    <div class="radio" *ngFor="let op of opCandidates">
+      <input type="radio" formControlName="candidate2" [value]="op">{{ op }}
     </div>
   </div>
 
   <div>
     <label>Challenger Party:</label>
-    <div class="radio" *ngFor="let canparty of canTwoParties">
-      <input type="radio" formControlName="candidate2Party" [value]="canparty">{{ canparty }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="candidate2Party" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Challenger Vice President:</label>
-    <div class="radio" *ngFor="let canvp of canTwoVPs">
-      <input type="radio" formControlName="candidate2VP" [value]="canvp">{{ canvp }}
+    <div class="textbox">
+      <input type="text" class="form-control" formControlName="candidate2VP"/>
     </div>
   </div>
 
@@ -72,22 +77,22 @@
       <input type="number" min="0" formControlName="candidate2Faithless">
     </div>
   </div>
-
+ <hr>
 </div>
 
-<div formGroupName="generalInfo">
+<div formGroupName="generalInfo" class="container">
   <h2>Generel Info</h2>
   <div>
     <label>Popular Vote Winner:</label>
-    <div class="radio" *ngFor="let popWin of popularVoteWinners">
-      <input type="radio" formControlName="popularVoteWinner" [value]="popWin">{{popWin}}
+    <div class="radio" *ngFor="let electionWin of electionWinners">
+      <input type="radio" formControlName="popularVoteWinner" [value]="electionWin">{{electionWin}}
     </div>
   </div>
 
   <div>
     <label>Electoral Vote Winner:</label>
-    <div class="radio" *ngFor="let elWin of electoralVoteWinners">
-      <input type="radio" formControlName="electoralVoteWinner" [value]="popWin">{{elWin}}
+    <div class="radio" *ngFor="let electionWin of electionWinners">
+      <input type="radio" formControlName="electoralVoteWinner" [value]="electionWin">{{electionWin}}
     </div>
   </div>
 
@@ -116,359 +121,362 @@
 
 <hr>
 
-<h2>State Winners</h2>
+<div formGroupName="swingStateInfo" class="container">
+  <h2 class="container">Swing State Info</h2>
+  <h5>*Default value is 2016 result.</h5>
+  <div>
+    <label>Ohio Winner:</label>
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="OHVote" [value]="party">{{ party }}
+    </div>
+  </div>
 
-<div formGroupName="stateInfo">
+    <div>
+      <label>Wisconsin Winner:</label>
+      <div class="radio" *ngFor="let party of allParties">
+        <input type="radio" formControlName="WIVote" [value]="party">{{ party }}
+      </div>
+    </div>
+  
+    <div>
+      <label>Florida Winner:</label>
+      <div class="radio" *ngFor="let party of allParties">
+        <input type="radio" formControlName="FLVote" [value]="party">{{ party }}
+      </div>
+    </div>
+  
+    <div>
+      <label>Iowa Winner:</label>
+      <div class="radio" *ngFor="let party of allParties">
+        <input type="radio" formControlName="IAVote" [value]="party">{{ party }}
+      </div>
+    </div>
+  
+    <div>
+      <label>Virginia Winner:</label>
+      <div class="radio" *ngFor="let party of allParties">
+        <input type="radio" formControlName="VAVote" [value]="party">{{ party }}
+      </div>
+    </div>
+  
+    <div>
+      <label>New Hampshire Winner:</label>
+      <div class="radio" *ngFor="let party of allParties">
+        <input type="radio" formControlName="NHVote" [value]="party">{{ party }}
+      </div>
+    </div>
+  
+    <div>
+      <label>Pennsylvania Winner:</label>
+      <div class="radio" *ngFor="let party of allParties">
+        <input type="radio" formControlName="PAVote" [value]="party">{{ party }}
+      </div>
+    </div>
+  
+  </div>
 
+  <hr>
+
+<h2 class="container">State Winners</h2>
+
+<div formGroupName="stateInfo" class="container">
+<h5>*Default value is 2016 result.</h5>
   <div>
     <label>Alabama Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="ALVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="ALVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Alaska Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="AKVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="AKVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Arizona Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="AZVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="AZVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Arkansas Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="ARVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="ARVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>California Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="CAVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="CAVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Colorado Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="COVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="COVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Conneticutt Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="CTVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="CTVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Delaware Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="DEVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="DEVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Georgia Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="GAVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="GAVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Hawaii Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="HIVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="HIVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Idaho Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="IDVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="IDVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Illinois Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="ILVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="ILVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Indiana Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="INVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="INVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Kansas Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="KSVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="KSVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Kentucky Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="KYVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="KYVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Lioussianna Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="LAVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="LAVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Maine Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="MEVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="MEVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Maryland Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="MDVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="MDVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Massachusetts Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="MAVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="MAVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Michigan Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="MIVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="MIVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Minnessota Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="MNVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="MNVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Mississippi Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="MSVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="MSVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Missouri Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="MOVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="MOVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Montanna Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="MTVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="MTVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Nebraska Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="NEVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="NEVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>New Jersey Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="NJVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="NJVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>New Mexico Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="NMVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="NMVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>New York Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="NYVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="NYVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>North Carolina Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="NCVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="NCVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>North Dakota Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="NDVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="NDVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Oklahoma Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="OKVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="OKVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Oregon Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="ORVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="ORVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Rhode Island Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="RIVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="RIVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>South Carolina Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="SCVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="SCVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>South Dakota Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="SDVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="SDVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Tennessee Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="TNVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="TNVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Texas Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="TXVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="TXVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Utah Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="UTVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="UTVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Vermont Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="VTVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="VTVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Washington Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="WAVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="WAVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>West Virginia Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="WVVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="WVVote" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
     <label>Wyoming Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="WYVote" [value]="canparty">{{ party }}
+    <div class="radio" *ngFor="let party of allParties">
+      <input type="radio" formControlName="WYVote" [value]="party">{{ party }}
     </div>
   </div>
 
 </div>
 
-<hr>
-
-<div formGroupName="swingStateInfo">
-<h2>Swing State Info</h2>
-  <div>
-    <label>Wisconsin Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="WIVote" [value]="canparty">{{ party }}
-    </div>
-  </div>
-
-  <div>
-    <label>Florida Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="FLVote" [value]="canparty">{{ party }}
-    </div>
-  </div>
-
-  <div>
-    <label>Iowa Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="IAVote" [value]="canparty">{{ party }}
-    </div>
-  </div>
-
-  <div>
-    <label>Ohio Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="OHVote" [value]="canparty">{{ party }}
-    </div>
-  </div>
-
-  <div>
-    <label>Virginia Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="VAVote" [value]="canparty">{{ party }}
-    </div>
-  </div>
-
-  <div>
-    <label>New Hampshire Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="NHVote" [value]="canparty">{{ party }}
-    </div>
-  </div>
-
-  <div>
-    <label>Pennsylvania Winner:</label>
-    <div class="radio" *ngFor="let party of parties">
-      <input type="radio" formControlName="PAVote" [value]="canparty">{{ party }}
-    </div>
-  </div>
-
-</div>
+<button type="submit" class="btn btn-primary container">Submit</button>
 
 </form>
