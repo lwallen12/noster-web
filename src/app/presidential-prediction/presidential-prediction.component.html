@@ -6,14 +6,31 @@
   some pretty outlandish options (Zorp the Surveyor) if you want to be absolutely un-associated with any sort of political
   leaning.
 </p>
+
 <form [formGroup]="predictionForm">
+
+  <p>My goal (still in progress) is to allow any possible grade-able prediction. So if you are wondering why Donald Trump 
+    is not a given, what if he decided to one day this year he'd rather just pack up and go home? Who would be the
+    replacement? 
+  </p>
+
+    <div class="container">
+      <button class="btn btn-primary container" *ngIf="!presPrediction" (click)="updatePrediction()">Start Predicting!</button>
+
+      
+      <div *ngIf="presPrediction">
+        <hr>
+        <p class="text-danger">You have already made a prediction. Your answers are currently populated. By clicking "Submit", 
+          any updates you make will be over-written.
+        </p>
+      </div>
+
+      <button class="btn btn-primary container" *ngIf="presPrediction" (click)="updatePrediction()">Update Prediction!</button>
+    </div>
+
+  <div *ngIf="nowPredicting">
+
   <div formGroupName="candidate1Info" class="container">
-
-    <p>My goal (still in progress) is to allow any possible grade-able prediction. So if you are wondering why Donald Trump 
-      is not a given, what if he decided to one day this year he'd rather just pack up and go home? Who would be the
-      replacement? 
-    </p>
-
 
     <h2>Incumbent Prediction</h2>
     <hr>
@@ -478,5 +495,7 @@
 </div>
 
 <button type="submit" class="btn btn-primary container">Submit</button>
+
+</div>
 
 </form>
