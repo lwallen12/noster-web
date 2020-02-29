@@ -114,3 +114,7 @@
 
     width: 100%;
   }
+
+  button {
+    margin: 12px;
+  }

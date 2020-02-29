@@ -30,7 +30,7 @@
 
   <div *ngIf="nowPredicting">
 
-  <div formGroupName="candidate1Info" class="container">
+  <div formGroupName="candidate1Info" class="container" *ngIf="can1Active">
 
     <h2>Incumbent Prediction</h2>
     <hr>
@@ -62,10 +62,13 @@
         <input class="test" type="number" min="0" formControlName="candidate1Faithless">
       </div>
     </div>
+
+    <button class="btn btn-primary" (click)="activateCan2()">Candidate 2 Info >></button>
+
 <hr>
 </div>
 
-<div formGroupName="candidate2Info" class="container">
+<div formGroupName="candidate2Info" class="container" *ngIf="can2Active">
   <h2>Challenger Prediction</h2>
   <div>
     <label>Challenger:</label>
@@ -94,10 +97,13 @@
       <input type="number" min="0" formControlName="candidate2Faithless">
     </div>
   </div>
- <hr>
+  <div class="btn-toolbar">
+  <button class="btn btn-primary" (click)="activateCan1()"><< Incumbent</button><button class="btn btn-primary" (click)="activateGeneral()">General >></button>
+</div>
+  <hr>
 </div>
 
-<div formGroupName="generalInfo" class="container">
+<div formGroupName="generalInfo" class="container" *ngIf="generalActive">
   <h2>Generel Info</h2>
   <div>
     <label>Popular Vote Winner:</label>
@@ -133,12 +139,13 @@
       <textarea formControlName="why" placeholder="Describe why this will happen"></textarea>
     </div>
   </div>
-  
+  <div class="btn-toolbar">
+   <button class="btn btn-primary" (click)="activateCan2()"><< Can2 </button><button class="btn btn-primary" (click)="activateSwing()">Swing >></button>
+  </div> 
+  <hr>
 </div>
 
-<hr>
-
-<div formGroupName="swingStateInfo" class="container">
+<div formGroupName="swingStateInfo" class="container" *ngIf="swingActive">
   <h2 class="container">Swing State Info</h2>
   <h5>*Default value is 2016 result.</h5>
   <div>
@@ -189,14 +196,16 @@
         <input type="radio" formControlName="PAVote" [value]="party">{{ party }}
       </div>
     </div>
-  
+  <div class="btn-toolbar">
+    <button class="btn btn-primary" (click)="activateGeneral()"><< General</button><button class="btn btn-primary" (click)="activateState()">Normal States >></button>
+  </div>
+    
   </div>
 
   <hr>
 
-<h2 class="container">State Winners</h2>
-
-<div formGroupName="stateInfo" class="container">
+<div formGroupName="stateInfo" class="container" *ngIf="stateActive">
+  <h2 class="container">State Winners</h2>
 <h5>*Default value is 2016 result.</h5>
   <div>
     <label>Alabama Winner:</label>
@@ -491,7 +500,7 @@
       <input type="radio" formControlName="WYVote" [value]="party">{{ party }}
     </div>
   </div>
-
+  <button class="btn btn-primary" (click)="activateSwing()"><< Swing State Info</button>
 </div>
 
 <button type="submit" class="btn btn-primary container">Submit</button>

@@ -21,6 +21,12 @@ export class PresidentialPredictionComponent implements OnInit {
 
   presPrediction: PresidentialPrediction;
 
+  can1Active: boolean = true;
+  can2Active: boolean = false;
+  generalActive: boolean = false;
+  swingActive: boolean = false;
+  stateActive: boolean = false;
+
   private currentActivePredSubject: BehaviorSubject<PresidentialPrediction>;
   public currentActivePrediction: Observable<PresidentialPrediction>;
 
@@ -32,35 +38,21 @@ export class PresidentialPredictionComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.presPredService.getCurrentActive().subscribe(
       data => {
         this.presPrediction = data;
         console.log(this.presPrediction);
       }
     )
-
   }
-
-  cans: string[] = ['Donald Trump', 'Mike Pence', 'Zorp the Surveyor', 'Other'];
-  canOneParties: string[] = ['Republican', 'Democrat', 'Independent', 'Other'];
-  canOneVPs: string[] = ['Mike Pence', 'Other', 'Herb Scaifer'];
-
-  canTwos: string[] = ['Bernie', 'Buhda Judge', 'Liz Warren'];
-  canTwoParties: string[] = ['Democrat', 'Independent', 'Coomunist', 'Tea Party', 'Anarchist', 'Polar Regions', 'Republican'];
-  canTwoVPs: string[] = ['Steve Martin', 'Beto', 'AOC'];
-
-
-  electionWinners: string[] = ['Donald Trump','Pete Buttigieg','Bernie Sanders','Elizabeth Warren','Amy Klobuchar',
-  'Joe Biden','Andrew Yang','Michael Bloomberg','Kamala Harris','Hillary Clinton', 'Mike Pence', 'Herb Scaifer', 'Zeke Schrute', 'Zorp the Surveyor '];
-
-  parties: string[] = ['Democrat', 'Independent', 'Coomunist', 'Tea Party', 'Anarchist', 'Polar Regions', 'Republican'];
-
-
-  allParties: string[] = ['Democrat', 'Republican', 'Independent or Minor Party', 'The Reasonabilists']
-  opCandidates: string[] = ['Pete Buttigieg','Bernie Sanders','Elizabeth Warren','Amy Klobuchar',
-    'Joe Biden','Andrew Yang','Michael Bloomberg','Kamala Harris','Hillary Clinton', 'Zeke Schrute']
   
+  
+  activateCan1() {this.can1Active=true;this.can2Active=false;this.generalActive=false;this.swingActive=false;this.stateActive=false;}
+  activateCan2() {this.can1Active=false;this.can2Active=true;this.generalActive=false;this.swingActive=false;this.stateActive=false;}
+  activateGeneral() {this.can1Active=false;this.can2Active=false;this.generalActive=true;this.swingActive=false;this.stateActive=false;}
+  activateSwing() {this.can1Active=false;this.can2Active=false;this.generalActive=false;this.swingActive=true;this.stateActive=false;}
+  activateState() {this.can1Active=false;this.can2Active=false;this.generalActive=false;this.swingActive=false;this.stateActive=true;}
+
 updatePrediction() {
 
   this.nowPredicting = true;
@@ -143,6 +135,25 @@ updatePrediction() {
     });
   }
 }
+
+  cans: string[] = ['Donald Trump', 'Mike Pence', 'Zorp the Surveyor', 'Other'];
+  canOneParties: string[] = ['Republican', 'Democrat', 'Independent', 'Other'];
+  canOneVPs: string[] = ['Mike Pence', 'Other', 'Herb Scaifer'];
+
+  canTwos: string[] = ['Bernie', 'Buhda Judge', 'Liz Warren'];
+  canTwoParties: string[] = ['Democrat', 'Independent', 'Coomunist', 'Tea Party', 'Anarchist', 'Polar Regions', 'Republican'];
+  canTwoVPs: string[] = ['Steve Martin', 'Beto', 'AOC'];
+
+
+  electionWinners: string[] = ['Donald Trump','Pete Buttigieg','Bernie Sanders','Elizabeth Warren','Amy Klobuchar',
+  'Joe Biden','Andrew Yang','Michael Bloomberg','Kamala Harris','Hillary Clinton', 'Mike Pence', 'Herb Scaifer', 'Zeke Schrute', 'Zorp the Surveyor '];
+
+  parties: string[] = ['Democrat', 'Independent', 'Coomunist', 'Tea Party', 'Anarchist', 'Polar Regions', 'Republican'];
+
+
+  allParties: string[] = ['Democrat', 'Republican', 'Independent or Minor Party', 'The Reasonabilists']
+  opCandidates: string[] = ['Pete Buttigieg','Bernie Sanders','Elizabeth Warren','Amy Klobuchar',
+    'Joe Biden','Andrew Yang','Michael Bloomberg','Kamala Harris','Hillary Clinton', 'Zeke Schrute']
 
   predictionForm = this.fb.group({
     candidate1Info: this.fb.group({
