@@ -19,7 +19,7 @@ export class PresidentialPredictionComponent implements OnInit {
 
   myvar: string;
 
-  presPrediction: PresidentialPrediction;
+  presPrediction: PresidentialPrediction = new PresidentialPrediction();
 
   can1Active: boolean = true;
   can2Active: boolean = false;
@@ -35,6 +35,7 @@ export class PresidentialPredictionComponent implements OnInit {
     private presPredService: PresidentialPredictionService) { 
       this.currentActivePredSubject = new BehaviorSubject<any>(this.presPredService.getCurrentActive());
       this.currentActivePrediction = this.currentActivePredSubject.asObservable();
+      
   }
 
   ngOnInit() {
@@ -136,6 +137,100 @@ updatePrediction() {
   }
 }
 
+onSubmit() {
+  console.log(this.predictionForm.value);
+  console.log(this.predictionForm.value.candidate1Info);
+  console.log(this.predictionForm.value.candidate1Info.candidate1);
+  //console.log(this.predictionForm.value.candidate1Info.candidate1Faithless);
+  //console.log(this.predictionForm.value.candidate1Info.candidate1Party);
+
+  var x = this.predictionForm.value.candidate1Info.candidate1;
+
+//this.presPrediction.candidate1 = 'Joe';
+
+this.presPrediction = new PresidentialPrediction();
+
+this.presPrediction.candidate1 = this.predictionForm.value.candidate1Info.candidate1;
+
+console.log('Our entire object prop: ')
+console.log(this.presPrediction);
+console.log('Here is value on objectprop.can1: ' + this.presPrediction.candidate1);
+
+this.presPrediction.candidate1Party = this.predictionForm.value.candidate1Info.candidate1Party;
+this.presPrediction.candidate1VP = this.predictionForm.value.candidate1Info.candidate1VP;
+this.presPrediction.candidate1FaithlessElectors = this.predictionForm.value.candidate1Info.candidate1Faithless;
+this.presPrediction.candidate2 = this.predictionForm.value.candidate2Info.candidate2;
+this.presPrediction.candidate2Party = this.predictionForm.value.candidate2Info.candidate2Party;
+this.presPrediction.candidate2VP = this.predictionForm.value.candidate2Info.candidate2VP;
+this.presPrediction.candidate2FaithlessElectors = this.predictionForm.value.candidate2Info.candidate2Faithless;
+this.presPrediction.popularVoteWinner = this.predictionForm.value.generalInfo.popularVoteWinner;
+this.presPrediction.electoralVoteWinner = this.predictionForm.value.generalInfo.electoralVoteWinner;
+this.presPrediction.electionWinner = this.predictionForm.value.generalInfo.electionWinner;
+this.presPrediction.description = this.predictionForm.value.generalInfo.description;
+this.presPrediction.why = this.predictionForm.value.generalInfo.why;
+this.presPrediction.alVote = this.predictionForm.value.stateInfo.ALVote;
+this.presPrediction.akVote = this.predictionForm.value.stateInfo.AKVote;
+this.presPrediction.azVote = this.predictionForm.value.stateInfo.AKVote;
+this.presPrediction.arVote = this.predictionForm.value.stateInfo.ARVote;
+this.presPrediction.caVote = this.predictionForm.value.stateInfo.CAVote;
+this.presPrediction.coVote = this.predictionForm.value.stateInfo.COVote;
+this.presPrediction.ctVote = this.predictionForm.value.stateInfo.CTVote;
+this.presPrediction.deVote = this.predictionForm.value.stateInfo.DEVote;
+this.presPrediction.flVote = this.predictionForm.value.swingStateInfo.FLVote;
+this.presPrediction.gaVote = this.predictionForm.value.stateInfo.GAVote;
+this.presPrediction.hiVote = this.predictionForm.value.stateInfo.HIVote;
+this.presPrediction.idVote = this.predictionForm.value.stateInfo.IDVote;
+this.presPrediction.ilVote = this.predictionForm.value.stateInfo.ILVote;
+this.presPrediction.inVote = this.predictionForm.value.stateInfo.INVote;
+this.presPrediction.iaVote = this.predictionForm.value.swingStateInfo.IAVote;
+this.presPrediction.ksVote = this.predictionForm.value.stateInfo.KSVote;
+this.presPrediction.kyVote = this.predictionForm.value.stateInfo.KYVote;
+this.presPrediction.laVote = this.predictionForm.value.stateInfo.LAVote;
+this.presPrediction.meVote = this.predictionForm.value.stateInfo.MEVote;
+this.presPrediction.mdVote = this.predictionForm.value.stateInfo.MDVote;
+this.presPrediction.maVote = this.predictionForm.value.stateInfo.MAVote;
+this.presPrediction.miVote = this.predictionForm.value.stateInfo.MIVote;
+this.presPrediction.mnVote = this.predictionForm.value.stateInfo.MNVote;
+this.presPrediction.msVote = this.predictionForm.value.stateInfo.MSVote;
+this.presPrediction.moVote = this.predictionForm.value.stateInfo.MOVote;
+this.presPrediction.mtVote = this.predictionForm.value.stateInfo.MTVote;
+this.presPrediction.neVote = this.predictionForm.value.stateInfo.NEVote;
+this.presPrediction.nvVote = this.predictionForm.value.stateInfo.NVVote;
+this.presPrediction.nhVote = this.predictionForm.value.swingStateInfo.NHVote;
+this.presPrediction.njVote = this.predictionForm.value.stateInfo.NJVote;
+this.presPrediction.nmVote = this.predictionForm.value.stateInfo.NMVote;
+this.presPrediction.nyVote = this.predictionForm.value.stateInfo.NYVote;
+this.presPrediction.ncVote = this.predictionForm.value.stateInfo.NCVote;
+this.presPrediction.ndVote = this.predictionForm.value.stateInfo.NDVote;
+this.presPrediction.ohVote = this.predictionForm.value.swingStateInfo.OHVote;
+this.presPrediction.okVote = this.predictionForm.value.stateInfo.OKVote;
+this.presPrediction.orVote = this.predictionForm.value.stateInfo.ORVote;
+this.presPrediction.paVote = this.predictionForm.value.swingStateInfo.PAVote;
+this.presPrediction.riVote = this.predictionForm.value.stateInfo.RIVote;
+this.presPrediction.scVote = this.predictionForm.value.stateInfo.SCVote;
+this.presPrediction.sdVote = this.predictionForm.value.stateInfo.SDVote;
+this.presPrediction.tnVote = this.predictionForm.value.stateInfo.TNVote;
+this.presPrediction.txVote = this.predictionForm.value.stateInfo.TXVote;
+this.presPrediction.utVote = this.predictionForm.value.stateInfo.UTVote;
+this.presPrediction.vtVote = this.predictionForm.value.stateInfo.VTVote;
+this.presPrediction.vaVote = this.predictionForm.value.swingStateInfo.VAVote;
+this.presPrediction.waVote = this.predictionForm.value.stateInfo.WAVote;
+this.presPrediction.wvVote = this.predictionForm.value.stateInfo.WVVote;
+this.presPrediction.wiVote = this.predictionForm.value.swingStateInfo.WIVote;
+this.presPrediction.wyVote = this.predictionForm.value.stateInfo.WYVote;
+
+console.log(this.predictionForm.value.stateInfo.WYVote);
+
+  //this.presPrediction = this.predictionForm.value;
+  //this.presPrediction.candidate1 = this.predictionForm.value.candidate1Info.candidate1;
+
+  this.presPredService.postPrediction(this.presPrediction).subscribe(
+    (res) => {
+      //console.log('HEre is our prediction: ' + res);
+    }
+  )
+}
+
   cans: string[] = ['Donald Trump', 'Mike Pence', 'Zorp the Surveyor', 'Other'];
   canOneParties: string[] = ['Republican', 'Democrat', 'Independent', 'Other'];
   canOneVPs: string[] = ['Mike Pence', 'Other', 'Herb Scaifer'];
@@ -158,7 +253,7 @@ updatePrediction() {
   predictionForm = this.fb.group({
     candidate1Info: this.fb.group({
       candidate1: new FormControl({value: 'Donald Trump', disabled: false}),
-      candidate1Party: new FormControl({value: 'Republican', disabled: true}),
+      candidate1Party: new FormControl({value: 'Republican', disabled: false}),
       candidate1VP: new FormControl({value: 'Mike Pence', disabled: false}),
       candidate1Faithless: new FormControl({value: 0}),
     }),

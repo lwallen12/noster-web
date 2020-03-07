@@ -17,16 +17,25 @@ export class PresidentialPredictionService {
     this.currentActivePrediction = this.currentActivePredSubject.asObservable();
    }
 
-  private url = 'http://localhost:57096/api/presidentialpredictions/active';
+  private urlGetActive = 'http://localhost:57096/api/presidentialpredictions/active';
+  private urlPostPres = 'http://localhost:57096/api/presidentialpredictions';
 
   getCurrentActive(): Observable<PresidentialPrediction> {
-    return this.http.get<PresidentialPrediction>(this.url)
+    return this.http.get<PresidentialPrediction>(this.urlGetActive)
     .pipe(map(currentActive => 
       {
       this.currentActivePredSubject.next(currentActive)
       return currentActive;
       }
     ));
+  }
+
+
+  postPrediction(presPrediction: PresidentialPrediction): Observable<PresidentialPrediction>{
+    return this.http.post<any>(this.urlPostPres, presPrediction)
+    .pipe(
+        //TODO: Anything? Error catching?
+    )
   }
 
 }

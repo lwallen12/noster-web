@@ -7,7 +7,7 @@
   leaning.
 </p>
 
-<form [formGroup]="predictionForm">
+<form [formGroup]="predictionForm" (ngSubmit)="onSubmit()">
 
   <p>My goal (still in progress) is to allow any possible grade-able prediction. So if you are wondering why Donald Trump 
     is not a given, what if he decided to one day this year he'd rather just pack up and go home? Who would be the
@@ -15,7 +15,7 @@
   </p>
 
     <div class="container">
-      <button class="btn btn-primary container" *ngIf="!presPrediction" (click)="updatePrediction()">Start Predicting!</button>
+      <button type="button" class="btn btn-primary container" *ngIf="!presPrediction" (click)="updatePrediction()">Start Predicting!</button>
 
       
       <div *ngIf="presPrediction">
@@ -25,7 +25,7 @@
         </p>
       </div>
 
-      <button class="btn btn-primary container" *ngIf="presPrediction" (click)="updatePrediction()">Update Prediction!</button>
+      <button type="button" class="btn btn-primary container" *ngIf="presPrediction" (click)="updatePrediction()">Update Prediction!</button>
     </div>
 
   <div *ngIf="nowPredicting">
@@ -127,7 +127,7 @@
   </div>
 
   <div>
-    <label>Election Winner:</label>
+    <label>Description:</label>
     <div class="textarea">
       <textarea formControlName="description" placeholder="Describe what will happen"></textarea>
     </div>
@@ -503,7 +503,7 @@
   <button class="btn btn-primary" (click)="activateSwing()"><< Swing State Info</button>
 </div>
 
-<button type="submit" class="btn btn-primary container">Submit</button>
+<button type="submit" class="btn btn-primary container" [disabled]="!predictionForm.valid">Submit</button>
 
 </div>
 
