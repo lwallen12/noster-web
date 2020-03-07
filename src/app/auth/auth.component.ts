@@ -36,6 +36,7 @@ export class AuthComponent implements OnInit {
   onSubmit() {
 
     this.loading = true;
+    console.log(this.loading);
 
     let login: Login = {
       email: this.loginForm.value.email,
@@ -47,7 +48,8 @@ export class AuthComponent implements OnInit {
         .subscribe(
             data => {
                 //console.log(data);
-                this.router.navigate(['/home']);
+                this.loading = false;
+                this.router.navigate(['/home/presidentialprediction']);
             },
             error => {
                 console.log(error);
@@ -60,7 +62,8 @@ export class AuthComponent implements OnInit {
     console.warn(this.loginForm.value);
     console.log(this.loginForm);
 
-    this.loading = false;
+    
+    console.log(this.loading);
   }
 
   onRegister() {

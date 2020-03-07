@@ -16,7 +16,7 @@ export class AuthService {
     this.currentUser = this.currentUserSubject.asObservable();
 }
 
-private loginURL = "http://localhost:57096/api/accounts/login";
+private loginURL = "https://xo32uewxqj.execute-api.us-east-1.amazonaws.com/Prod/api/accounts/login";
 
 login(login: Login) {
   return this.http.post<string>(this.loginURL, login, {headers:{ 'Content-Type': 'application/json' }, 
@@ -47,12 +47,12 @@ getAuthorizationToken() {
 
 //Just to test auth and intereptor work
 getProtected() {
-  return this.http.get<any>('http://localhost:57096/api/accounts/protected');
+  return this.http.get<any>('https://xo32uewxqj.execute-api.us-east-1.amazonaws.com/Prod/api/accounts/protected');
 }
 
 refreshToken() {
 
-  return this.http.post<any>("http://localhost:57096/api/accounts/refresh", null, {headers:{ 'Authorization': 'Bearer ' + this.getAuthorizationToken() }, 
+  return this.http.post<any>("https://xo32uewxqj.execute-api.us-east-1.amazonaws.com/Prod/api/accounts/refresh", null, {headers:{ 'Authorization': 'Bearer ' + this.getAuthorizationToken() }, 
   responseType:'text' as 'json' })
     .pipe(map(user => {
       localStorage.setItem('currentUser', user);

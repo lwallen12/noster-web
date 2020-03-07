@@ -1,5 +1,7 @@
 <div class="container">
 
+  
+
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="main" *ngIf="loginMode">
   <h1>Login</h1>
   <hr>
@@ -99,6 +101,6 @@
 
 </form>
 
-</div>
-
 <app-loading *ngIf="loading"></app-loading>
+
+</div>

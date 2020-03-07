@@ -14,6 +14,7 @@ export class PresidentialPredictionComponent implements OnInit {
   isUpdate: boolean = false;
   r = 'Republican';
   d = 'Democrat';
+  
 
   nowPredicting = false;
 
@@ -227,6 +228,7 @@ console.log(this.predictionForm.value.stateInfo.WYVote);
   this.presPredService.postPrediction(this.presPrediction).subscribe(
     (res) => {
       //console.log('HEre is our prediction: ' + res);
+      this.nowPredicting = false;
     }
   )
 }
