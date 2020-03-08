@@ -14,13 +14,13 @@
     replacement? 
   </p>
 
-    <div class="container">
+    <div *ngIf="!nowPredicting" class="container">
       <button type="button" class="btn btn-primary container" *ngIf="!presPrediction" (click)="updatePrediction()">Start Predicting!</button>
 
       
       <div *ngIf="presPrediction">
         <hr>
-        <p class="text-danger">You have already made a prediction. Your answers are currently populated. By clicking "Submit", 
+        <p class="text-danger">You have already made a prediction. Your answers are currently populated. By proceeding, 
           any updates you make will be over-written.
         </p>
       </div>
@@ -32,73 +32,75 @@
 
   <div formGroupName="candidate1Info" class="container" *ngIf="can1Active">
 
-    <h2>Incumbent Prediction</h2>
+    <h2>Incumbent Ticket Prediction</h2>
     <hr>
 
     <div>
-        <label>Incumbent (Or Replacement):</label>
+        <label>Who will be the incumbent candidate?</label>
         <div class="radio" *ngFor="let can of cans">
           <input type="radio" formControlName="candidate1" [value]="can">{{ can }}
         </div>
     </div>
 
     <div>
-      <label>Incumbent Party:</label>
+      <label>What party will the incumbent president be a part of?</label>
       <div class="radio" *ngFor="let canparty of canOneParties">
         <input type="radio" formControlName="candidate1Party" [value]="canparty">{{ canparty }}
       </div>
     </div>
 
     <div>
-      <label>Incumbent (Or Replacement) Vice President:</label>
+      <label>Who will be the vice president on this ticket?</label>
       <div class="radio" *ngFor="let canvp of canOneVPs">
         <input type="radio" formControlName="candidate1VP" [value]="canvp">{{ canvp }}
       </div>
     </div>
 
     <div>
-      <label>Number of Faithless Electorates:</label>
+      <label>How many "Faithless Electorates" will this ticket have? <small> (This is people in the Electoral college who do not 
+        vote for the candidate the state votes for).</small></label>
       <div>
         <input class="test" type="number" min="0" formControlName="candidate1Faithless">
       </div>
     </div>
 
-    <button class="btn btn-primary" (click)="activateCan2()">Candidate 2 Info >></button>
+    <button class="btn btn-primary" (click)="activateCan2()">Challenger Ticket Prediction >></button>
 
 <hr>
 </div>
 
 <div formGroupName="candidate2Info" class="container" *ngIf="can2Active">
-  <h2>Challenger Prediction</h2>
+  <h2>Challenger Ticket Prediction</h2>
   <div>
-    <label>Challenger:</label>
+    <label>Who will challenge the incumbent?</label>
     <div class="radio" *ngFor="let op of opCandidates">
       <input type="radio" formControlName="candidate2" [value]="op">{{ op }}
     </div>
   </div>
 
   <div>
-    <label>Challenger Party:</label>
+    <label>Which party will this candidate belong to?</label>
     <div class="radio" *ngFor="let party of allParties">
       <input type="radio" formControlName="candidate2Party" [value]="party">{{ party }}
     </div>
   </div>
 
   <div>
-    <label>Challenger Vice President:</label>
+    <label>Who will be the Vice President on this ticket?</label>
     <div class="textbox">
       <input type="text" class="form-control" formControlName="candidate2VP"/>
     </div>
   </div>
 
   <div>
-    <label>Number of Faithless Electorates:</label>
+    <label>How many "Faithless Electorates" will this ticket have? <small> (This is people in the Electoral college who do not 
+      vote for the candidate the state votes for).</small></label>
     <div>
       <input type="number" min="0" formControlName="candidate2Faithless">
     </div>
   </div>
   <div class="btn-toolbar">
-  <button class="btn btn-primary" (click)="activateCan1()"><< Incumbent</button><button class="btn btn-primary" (click)="activateGeneral()">General >></button>
+  <button class="btn btn-primary" (click)="activateCan1()"><< Incumbent Ticket Prediction</button><button class="btn btn-primary" (click)="activateGeneral()">General Election Prediction >></button>
 </div>
   <hr>
 </div>
@@ -106,48 +108,48 @@
 <div formGroupName="generalInfo" class="container" *ngIf="generalActive">
   <h2>Generel Info</h2>
   <div>
-    <label>Popular Vote Winner:</label>
+    <label>Who will win the popular vote? <small>(Who will have more votes from the general population of voters?)</small></label>
     <div class="radio" *ngFor="let electionWin of electionWinners">
       <input type="radio" formControlName="popularVoteWinner" [value]="electionWin">{{electionWin}}
     </div>
   </div>
 
   <div>
-    <label>Electoral Vote Winner:</label>
+    <label>Who will receive more votes from the electoral college?</label>
     <div class="radio" *ngFor="let electionWin of electionWinners">
       <input type="radio" formControlName="electoralVoteWinner" [value]="electionWin">{{electionWin}}
     </div>
   </div>
 
   <div>
-    <label>Election Winner:</label>
+    <label>Who will actually win the election?</label>
     <div class="radio" *ngFor="let electionWin of electionWinners">
       <input type="radio" formControlName="electionWinner" [value]="electionWin">{{electionWin}}
     </div>
   </div>
 
   <div>
-    <label>Description:</label>
+    <label>Describe in your own words what will happen:</label>
     <div class="textarea">
       <textarea formControlName="description" placeholder="Describe what will happen"></textarea>
     </div>
   </div>
 
   <div>
-    <label>Why:</label>
+    <label>Describe why you think this will happen:</label>
     <div class="textarea">
       <textarea formControlName="why" placeholder="Describe why this will happen"></textarea>
     </div>
   </div>
   <div class="btn-toolbar">
-   <button class="btn btn-primary" (click)="activateCan2()"><< Can2 </button><button class="btn btn-primary" (click)="activateSwing()">Swing >></button>
+   <button class="btn btn-primary" (click)="activateCan2()"><< Challenger Ticket Prediction </button><button class="btn btn-primary" (click)="activateSwing()">Swing State Outcomes >></button>
   </div> 
   <hr>
 </div>
 
 <div formGroupName="swingStateInfo" class="container" *ngIf="swingActive">
-  <h2 class="container">Swing State Info</h2>
-  <h5>*Default value is 2016 result.</h5>
+  <h2 class="container">Select who will win the vote in each state.</h2>
+  <h5>*Default value is 2016 result. If you want to skip these, you absolutely can.</h5>
   <div>
     <label>Ohio Winner:</label>
     <div class="radio" *ngFor="let party of allParties">
@@ -197,7 +199,7 @@
       </div>
     </div>
   <div class="btn-toolbar">
-    <button class="btn btn-primary" (click)="activateGeneral()"><< General</button><button class="btn btn-primary" (click)="activateState()">Normal States >></button>
+    <button class="btn btn-primary" (click)="activateGeneral()"><< General Election Prediction</button><button class="btn btn-primary" (click)="activateState()">Normal State Outcomes >></button>
   </div>
     
   </div>
@@ -206,7 +208,7 @@
 
 <div formGroupName="stateInfo" class="container" *ngIf="stateActive">
   <h2 class="container">State Winners</h2>
-<h5>*Default value is 2016 result.</h5>
+<h5>*Default value is 2016 result. If you want to skip these, you absolutely can.</h5>
   <div>
     <label>Alabama Winner:</label>
     <div class="radio" *ngFor="let party of allParties">
@@ -500,7 +502,7 @@
       <input type="radio" formControlName="WYVote" [value]="party">{{ party }}
     </div>
   </div>
-  <button class="btn btn-primary" (click)="activateSwing()"><< Swing State Info</button>
+  <button class="btn btn-primary" (click)="activateSwing()"><< Swing State Outcomes</button>
 </div>
 
 <button type="submit" class="btn btn-primary container" [disabled]="!predictionForm.valid">Submit</button>
