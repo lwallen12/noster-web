@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { DropdownDirective } from './directives/dropdown.directive';
-import { BrowseComponent } from './browse/browse.component';
 import { HomeComponent } from './home/home.component';
 import { ScoresComponent } from './scores/scores.component';
 import { PresidentialPredictionComponent } from './presidential-prediction/presidential-prediction.component';
@@ -19,6 +18,7 @@ import { IdleComponent } from './modals/idle.component';
 
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { LoadingComponent } from './modals/loading.component';
+import { BrowseModule } from './browse/browse.module';
 
 
 @NgModule({
@@ -26,7 +26,6 @@ import { LoadingComponent } from './modals/loading.component';
     AppComponent,
     HeaderComponent,
     DropdownDirective,
-    BrowseComponent,
     HomeComponent,
     ScoresComponent,
     PresidentialPredictionComponent,
@@ -42,7 +41,8 @@ import { LoadingComponent } from './modals/loading.component';
     ReactiveFormsModule,
     HttpClientModule,
     NgIdleKeepaliveModule.forRoot(),
-    MomentModule
+    MomentModule,
+    BrowseModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, 
     useClass: AuthInterceptor, multi: true}],

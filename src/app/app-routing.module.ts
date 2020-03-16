@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { BrowseComponent } from './browse/browse.component';
 import { HomeComponent } from './home/home.component';
 import { PresidentialPredictionComponent } from './presidential-prediction/presidential-prediction.component';
@@ -11,7 +11,6 @@ import { AuthGuard } from "./auth/auth-guard";
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
-    {path: 'browse', component: BrowseComponent},
     {path: 'presidentialprediction', component: PresidentialPredictionComponent},
     {path: 'scores', component: ScoresComponent},
     {path: 'worldseries', component: WorldSeriesComponent}
@@ -20,7 +19,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
