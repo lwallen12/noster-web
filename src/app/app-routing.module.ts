@@ -11,6 +11,8 @@ import { AuthGuard } from "./auth/auth-guard";
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
+    {path: 'browse', loadChildren: () => import('./browse/browse.module').then(m => m.BrowseModule)},
+    //{path: 'browse', loadChildren: './browse/browse.module.ts#BrowseModule'},
     {path: 'presidentialprediction', component: PresidentialPredictionComponent},
     {path: 'scores', component: ScoresComponent},
     {path: 'worldseries', component: WorldSeriesComponent}

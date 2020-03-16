@@ -7,9 +7,8 @@ import { AuthGuard } from '../auth/auth-guard';
 
 
 const froutes: Routes = [
-    {path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
-        {path: 'browse', component: BrowseComponent}
-    ]},
+     
+        {path: '', component: BrowseComponent, canActivate: [AuthGuard]}
   ];
   
   @NgModule({
