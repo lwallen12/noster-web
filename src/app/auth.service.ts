@@ -20,6 +20,8 @@ private loginURL = "https://xo32uewxqj.execute-api.us-east-1.amazonaws.com/Prod/
 private prodURL = "https://xo32uewxqj.execute-api.us-east-1.amazonaws.com/Prod/api/accounts/";
 private devURL = "http://localhost:57096/api/accounts/";
 
+private newULR ="https://xo32uewxqj.execute-api.us-east-1.amazonaws.com/Prod";
+
 login(login: Login) {
   return this.http.post<string>(this.loginURL, login, {headers:{ 'Content-Type': 'application/json' }, 
   responseType:'text' as 'json' })
