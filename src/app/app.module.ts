@@ -19,6 +19,7 @@ import { IdleComponent } from './modals/idle.component';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { LoadingComponent } from './modals/loading.component';
 import { BrowseModule } from './browse/browse.module';
+import { ResetComponent } from './auth/reset/reset.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { BrowseModule } from './browse/browse.module';
     WorldSeriesComponent,
     AuthComponent,
     IdleComponent,
-    LoadingComponent
+    LoadingComponent,
+    ResetComponent
   ],
   imports: [
     BrowserModule,

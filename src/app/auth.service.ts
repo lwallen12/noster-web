@@ -17,6 +17,7 @@ export class AuthService {
 }
 
 private loginURL = "https://xo32uewxqj.execute-api.us-east-1.amazonaws.com/Prod/api/accounts/login";
+private devURL = "http://localhost:57096/api/accounts/";
 
 login(login: Login) {
   return this.http.post<string>(this.loginURL, login, {headers:{ 'Content-Type': 'application/json' }, 
@@ -31,6 +32,29 @@ login(login: Login) {
 
     return user;
   }));
+}
+
+register(login: Login) {
+  return this.http.post<string>(this.devURL + 'register', login, {headers:{ 'Content-Type': 'application/json' }, 
+  responseType:'text' as 'json' })
+    .pipe(map(user => {
+      localStorage.setItem('currentUser', user);
+
+      this.currentUserSubject.next(user);
+
+      console.log(user);
+      
+      return user;
+    }));
+}
+
+reset(user: UserSet) {
+  return this.http.post<string>(this.devURL + 'reset', user);
+}
+
+changePassword(user: UserChange) {
+  //TODO: Make call to change Password in API
+  return this.http.post<any>(this.devURL + 'change', user)
 }
 
 logout() {
@@ -72,4 +96,14 @@ refreshToken() {
 export class Login {
   email: string;
   password: string;
+}
+
+export class UserSet {
+  username: string;
+}
+
+export class UserChange {
+  username: string;
+  resetToken: string;
+  newPassword: string;
 }

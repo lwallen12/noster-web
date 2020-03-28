@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { MustMatch } from '../shared/must-match';
 import { Validators } from '@angular/forms';
-import { AuthService, Login } from '../auth.service';
+import { AuthService, Login, UserSet, UserChange } from '../auth.service';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-auth',
@@ -14,6 +15,9 @@ import { Router } from '@angular/router';
 export class AuthComponent implements OnInit {
   submitted = false;
   loginMode = true;
+  registerMode = false;
+  resetMode = false;
+  changeMode = false;
   errorMessage;
 
   loading = false;
@@ -33,10 +37,24 @@ export class AuthComponent implements OnInit {
       validator: MustMatch('password', 'confirmPassword')
   });
 
+  resetForm = this.fb.group({
+    email: ['', [Validators.required, Validators.email]]
+  });
+
+
+  changePasswordForm = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    token: ['', [Validators.required]],
+    password: ['', [Validators.required, Validators.minLength(8)]],
+    confirmPassword: ['', [Validators.required]]
+  }, {
+      validator: MustMatch('password', 'confirmPassword')
+  });
+
+
   onSubmit() {
 
     this.loading = true;
-    console.log(this.loading);
 
     let login: Login = {
       email: this.loginForm.value.email,
@@ -47,7 +65,6 @@ export class AuthComponent implements OnInit {
         .pipe(first())
         .subscribe(
             data => {
-                //console.log(data);
                 this.loading = false;
                 this.router.navigate(['/home/presidentialprediction']);
             },
@@ -55,28 +72,138 @@ export class AuthComponent implements OnInit {
                 console.log(error);
                 this.errorMessage = error.message;
                 this.loginForm.value.password = '';
+                this.loading = false;
             });
 
     this.submitted = true;
+    
 
     console.warn(this.loginForm.value);
     console.log(this.loginForm);
-
-    
-    console.log(this.loading);
   }
 
   onRegister() {
-    this.submitted = true;
 
+    this.loading = true;
+
+    let register: Login = {
+      email: this.registerForm.value.email,
+      password: this.registerForm.value.password
+    }
+
+    this.authService.register(register)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.loading = false;
+          this.router.navigate(['/home/presidentialprediction']);
+        },
+        error => {
+          console.log(error);
+          this.errorMessage = error.message;
+          this.registerForm.reset();
+          this.loading = false;
+      });
+
+    this.submitted = true;
     console.log(this.registerForm);
   }
 
-  switchMode() {
+  onSendReset() {
+
+    this.loading = true;
+    
+    let noster: UserSet = {
+      username: this.resetForm.value.email
+    }
+
+    this.authService.reset(noster).subscribe(
+      data => {
+        this.loading = false; 
+        this.goChangeMode();
+      }, error => {
+        this.loading = false;
+        window.alert(error.message);
+        this.startLogin();
+      }
+    );
+
+    console.log(this.resetForm);
+   
+  }
+
+  goChangeMode() {
+    this.changeMode = true;
+    this.loginMode = false;
+    this.registerMode = false;
+    this.resetMode = false;
+    this.submitted = false;
+  }
+
+  onChangePassword() {
+
+    this.loading = true;
+
+    let noster: UserChange = {
+      username: this.changePasswordForm.value.email,
+      resetToken: this.changePasswordForm.value.token,
+      newPassword: this.changePasswordForm.value.password
+    }
+
+    this.authService.changePassword(noster).subscribe(
+        data => {
+          this.loading = false;
+        }, error => {
+          this.loading = false;
+          window.alert(error.message);
+          this.startLogin();
+        }
+    )
+
     this.loginForm.reset();
     this.registerForm.reset();
+    this.resetForm.reset();
+    this.changePasswordForm.reset();
 
-    this.loginMode = !this.loginMode;
+    //TODO: Call API, Send us back to login mode
+
+    this.changeMode = false;
+    this.loginMode = true;
+  }
+
+  startLogin() {
+    this.loginForm.reset();
+    this.registerForm.reset();
+    this.resetForm.reset();
+    this.changePasswordForm.reset();
+
+    this.loginMode = true;
+    this.registerMode = false;
+    this.resetMode = false;
+    this.submitted = false;
+  }
+
+  startForgotPassword() {
+    this.loginForm.reset();
+    this.registerForm.reset();
+    this.resetForm.reset();
+    this.changePasswordForm.reset();
+
+    this.loginMode = false;
+    this.registerMode = false;
+    this.resetMode = true;
+    this.submitted = false;
+  }
+
+  startRegister() {
+    this.loginForm.reset();
+    this.registerForm.reset();
+    this.resetForm.reset();
+    this.changePasswordForm.reset();
+
+    this.loginMode = false;
+    this.registerMode = true;
+    this.resetMode = false;
     this.submitted = false;
   }
   
