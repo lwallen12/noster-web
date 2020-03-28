@@ -17,6 +17,7 @@ export class AuthService {
 }
 
 private loginURL = "https://xo32uewxqj.execute-api.us-east-1.amazonaws.com/Prod/api/accounts/login";
+private prodURL = "https://xo32uewxqj.execute-api.us-east-1.amazonaws.com/Prod/api/accounts/";
 private devURL = "http://localhost:57096/api/accounts/";
 
 login(login: Login) {
@@ -35,7 +36,7 @@ login(login: Login) {
 }
 
 register(login: Login) {
-  return this.http.post<string>(this.devURL + 'register', login, {headers:{ 'Content-Type': 'application/json' }, 
+  return this.http.post<string>(this.prodURL + 'register', login, {headers:{ 'Content-Type': 'application/json' }, 
   responseType:'text' as 'json' })
     .pipe(map(user => {
       localStorage.setItem('currentUser', user);
@@ -49,12 +50,12 @@ register(login: Login) {
 }
 
 reset(user: UserSet) {
-  return this.http.post<string>(this.devURL + 'reset', user);
+  return this.http.post<string>(this.prodURL + 'reset', user);
 }
 
 changePassword(user: UserChange) {
   //TODO: Make call to change Password in API
-  return this.http.post<any>(this.devURL + 'change', user)
+  return this.http.post<any>(this.prodURL + 'change', user)
 }
 
 logout() {
