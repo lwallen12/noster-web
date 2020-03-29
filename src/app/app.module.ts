@@ -19,8 +19,9 @@ import { IdleComponent } from './modals/idle.component';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { LoadingComponent } from './modals/loading.component';
 import { BrowseModule } from './browse/browse.module';
-import { ResetComponent } from './auth/reset/reset.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
+import { BlankHeaderComponent } from './blank-header/blank-header.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 @NgModule({
@@ -35,8 +36,9 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
     AuthComponent,
     IdleComponent,
     LoadingComponent,
-    ResetComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    BlankHeaderComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

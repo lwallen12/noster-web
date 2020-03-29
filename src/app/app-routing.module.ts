@@ -6,7 +6,7 @@ import { ScoresComponent } from './scores/scores.component';
 import { WorldSeriesComponent } from './world-series/world-series.component';
 import { AuthComponent } from './auth/auth.component';
 import { AuthGuard } from "./auth/auth-guard";
-import { ResetComponent } from './auth/reset/reset.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -16,9 +16,8 @@ const routes: Routes = [
     {path: 'scores', component: ScoresComponent},
     {path: 'worldseries', component: WorldSeriesComponent}
     ]},
-  {path: 'auth', component: AuthComponent, children: [
-    {path: "reset", component: ResetComponent}
-  ]}
+  {path: 'auth', component: AuthComponent},
+  {path: '**', component: NotFoundComponent}
 ];
 
 @NgModule({
