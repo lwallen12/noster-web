@@ -1,5 +1,18 @@
 <app-header></app-header>
 <div class="container">
-  <router-outlet></router-outlet>
+  <router-outlet  #myOutlet="outlet"></router-outlet>
+  <!-- {{myOutlet.isActivated}} -->
+  <div *ngIf="!myOutlet.isActivated">
+    <h1>Welcome to iNostradamus!</h1>
+    <p>Make predictions, see scores and see what others have predicted!</p>
+
+    <div class="sector">
+      <div class="notif">Updates</div>
+      <div class="notif">High Scores</div>
+      <div class="notif">Resources</div>
+      <div class="notif">Instructions</div>
+    </div>
+    
+  </div>
 </div>
 <app-idle *ngIf="isIdle" [message]="idleState"></app-idle>

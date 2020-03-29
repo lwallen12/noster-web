@@ -1,8 +1,10 @@
 import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NgIdleKeepaliveModule, Keepalive } from '@ng-idle/keepalive';
 import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -23,13 +25,19 @@ export class HomeComponent implements OnInit, OnDestroy {
   title = 'angular-idle-timeout';
   isIdle: boolean = false;
 
+  currentURL: string;
+
   myInterval;
 
   constructor(private authService: AuthService, 
     private router: Router, 
+    private route: ActivatedRoute,
     private idle: Idle, 
     private ngZone: NgZone,
     private keepalive: Keepalive) {
+      
+  this.route.url.subscribe(data =>
+      console.log(data));
 
     idle.setIdle(1200); //1200 for 20 minutes
     // sets a timeout period of 5 seconds. after 10 seconds of inactivity, the user will be considered timed out.
@@ -116,8 +124,7 @@ mySetInterval() {
   }
 
   ngOnInit() {
-    //this.getExpirations();
-
+    this.currentURL = this.router.url;
     this.mySetInterval();
   }
 

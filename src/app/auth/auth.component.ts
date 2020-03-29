@@ -65,7 +65,7 @@ export class AuthComponent implements OnInit {
         .subscribe(
             data => {
                 this.loading = false;
-                this.router.navigate(['/home/presidentialprediction']);
+                this.router.navigate(['/home']);
             },
             error => {
                 console.log(error);
@@ -95,7 +95,7 @@ export class AuthComponent implements OnInit {
       .subscribe(
         data => {
           this.loading = false;
-          this.router.navigate(['/home/presidentialprediction']);
+          this.router.navigate(['/home']);
         },
         error => {
           console.log(error);
