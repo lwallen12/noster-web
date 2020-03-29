@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { MustMatch } from '../shared/must-match';
 import { Validators } from '@angular/forms';
 import { AuthService, Login, UserSet, UserChange } from '../auth.service';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-auth',

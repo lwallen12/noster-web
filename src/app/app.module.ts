@@ -21,7 +21,6 @@ import { LoadingComponent } from './modals/loading.component';
 import { BrowseModule } from './browse/browse.module';
 import { ResetComponent } from './auth/reset/reset.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
