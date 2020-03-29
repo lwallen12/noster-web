@@ -20,6 +20,8 @@ import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { LoadingComponent } from './modals/loading.component';
 import { BrowseModule } from './browse/browse.module';
 import { ResetComponent } from './auth/reset/reset.component';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
+
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { ResetComponent } from './auth/reset/reset.component';
     AuthComponent,
     IdleComponent,
     LoadingComponent,
-    ResetComponent
+    ResetComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

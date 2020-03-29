@@ -14,8 +14,7 @@ export class PresidentialPredictionComponent implements OnInit {
   isUpdate: boolean = false;
   r = 'Republican';
   d = 'Democrat';
-  
-
+  spinning = false;
   nowPredicting = false;
 
   myvar: string;
@@ -139,6 +138,9 @@ updatePrediction() {
 }
 
 onSubmit() {
+
+  this.spinning = true;
+
   console.log(this.predictionForm.value);
   console.log(this.predictionForm.value.candidate1Info);
   console.log(this.predictionForm.value.candidate1Info.candidate1);
@@ -229,6 +231,7 @@ console.log(this.predictionForm.value.stateInfo.WYVote);
     (res) => {
       //console.log('HEre is our prediction: ' + res);
       this.nowPredicting = false;
+      this.spinning = false;
     }
   )
 }
