@@ -7,10 +7,14 @@
     <p>Make predictions, see scores and see what others have predicted!</p>
 
     <div class="sector">
-      <div class="notif">Updates</div>
-      <div class="notif">High Scores</div>
-      <div class="notif">Resources</div>
-      <div class="notif">Instructions</div>
+      <div class="notif" (click)="updateDropDown()">Updates ></div>
+      <p *ngIf="updateSection">Information on Updates</p>
+      <div class="notif" (click)="highScoreDropDown()">High Scores ></div>
+      <p *ngIf="highScoreSection">Info on High Scores</p>
+      <div class="notif" (click)="resourceDropDown()">Resources ></div>
+      <p *ngIf="resourceSection">Info on Information/Resources</p>
+      <div class="notif" (click)="instructionDropDown()">Instructions ></div>
+      <p *ngIf="instructionSection">Info on Insrtuctions</p>
     </div>
     
   </div>

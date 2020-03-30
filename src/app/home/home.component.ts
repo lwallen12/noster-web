@@ -13,6 +13,11 @@ import { map } from 'rxjs/operators';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
+  updateSection = false;
+  highScoreSection = false;
+  resourceSection = false;
+  instructionSection = false;
+
   now;
   expiresIn;
   authorizedTime;
@@ -128,6 +133,21 @@ mySetInterval() {
     this.mySetInterval();
   }
 
+  updateDropDown() {
+    this.updateSection = !this.updateSection;
+  }
+
+  highScoreDropDown() {
+    this.highScoreSection = !this.highScoreSection;
+  }
+
+  resourceDropDown() {
+    this.resourceSection = !this.resourceSection;
+  }
+
+  instructionDropDown() {
+    this.instructionSection = !this.instructionSection;
+  }
   
 
   ngOnDestroy(): void {
