@@ -5,6 +5,8 @@ import { Validators } from '@angular/forms';
 import { AuthService, Login, UserSet, UserChange } from '../auth.service';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { PatternValidatorService } from '../shared/pattern-validator.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-auth',
@@ -12,16 +14,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent implements OnInit {
+//password: ['', [Validators.required, Validators.minLength(8), Validators.pattern('(?=.*[a-z])(?=.*?[0-9])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,}')]],
+
   submitted = false;
   loginMode = true;
   registerMode = false;
   resetMode = false;
   changeMode = false;
   errorMessage;
+  environment = environment;
 
   loading = false;
   
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
+  constructor(private fb: FormBuilder, 
+              private authService: AuthService, 
+              private router: Router,
+              private patternValidator: PatternValidatorService) { }
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -30,7 +38,7 @@ export class AuthComponent implements OnInit {
 
   registerForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(8)]],
+    password: ['', [Validators.required, Validators.minLength(8), Validators.pattern('(?=.*[0-9]+.*)(?=.*[a-z]+.*)(?=.*[A-Z]+.*)(?=.*\W+.*).{8,}(?=.*[0-9]+.*)(?=.*[a-z]+.*)(?=.*[A-Z]+.*)(?=.*\W+.*).{8,}')]],
     confirmPassword: ['', [Validators.required]]
   }, {
       validator: MustMatch('password', 'confirmPassword')
@@ -40,11 +48,10 @@ export class AuthComponent implements OnInit {
     email: ['', [Validators.required, Validators.email]]
   });
 
-
   changePasswordForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     token: ['', [Validators.required]],
-    password: ['', [Validators.required, Validators.minLength(8)]],
+    password: ['', [Validators.required, Validators.minLength(8), Validators.pattern('(?=.*[a-z])(?=.*?[0-9])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,}')]],
     confirmPassword: ['', [Validators.required]]
   }, {
       validator: MustMatch('password', 'confirmPassword')

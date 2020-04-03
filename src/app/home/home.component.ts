@@ -5,6 +5,7 @@ import { NgIdleKeepaliveModule, Keepalive } from '@ng-idle/keepalive';
 import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +18,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   highScoreSection = false;
   resourceSection = false;
   instructionSection = false;
+
+  environment = environment;
 
   now;
   expiresIn;

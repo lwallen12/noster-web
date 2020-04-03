@@ -31,7 +31,7 @@
         </div>
         <div *ngIf="loginForm.controls.password.errors?.minlength" class="text-danger">
             Minimum of 8 characters.
-      </div>
+        </div>
     </div>
   </div>
 
@@ -72,6 +72,9 @@
       </div>
       <div *ngIf="registerForm.controls.password.errors?.minlength" class="text-danger">
           Minimum of 8 characters.
+     </div>
+     <div *ngIf="registerForm.controls.password.errors?.pattern" class="text-danger">
+      Password must contain a non-alphanumeric character, a number, a lowercase and an uppercase character.
     </div>
   </div>
 </div>
@@ -169,7 +172,10 @@
         </div>
         <div *ngIf="changePasswordForm.controls.password.errors?.minlength" class="text-danger">
             Minimum of 8 characters.
-      </div>
+        </div>
+        <div *ngIf="changePasswordForm.controls.password.errors?.pattern" class="text-danger">
+          Password must contain a non-alphanumeric character, a number, a lowercase and an uppercase character.
+        </div>
     </div>
   </div>
 
@@ -192,9 +198,11 @@
     <button [disabled]="changePasswordForm.invalid" type="submit" class="btn btn-primary">Update</button>
   </div>
 </form>
-
-<app-loading *ngIf="loading"></app-loading>
+<p><small>{{environment.version}}</small></p>
 <app-spinner *ngIf="loading"></app-spinner>
+<app-loading *ngIf="loading"></app-loading>
 
 
 </div>
+
+

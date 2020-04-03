@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { PresidentialPrediction } from '../models/presidential-prediction';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,8 @@ export class PresidentialPredictionService {
     this.currentActivePrediction = this.currentActivePredSubject.asObservable();
    }
 
-  private urlGetActive = 'https://xo32uewxqj.execute-api.us-east-1.amazonaws.com/Prod/api/presidentialpredictions/active';
-  private urlPostPres = 'https://xo32uewxqj.execute-api.us-east-1.amazonaws.com/Prod/api/presidentialpredictions';
+  private urlGetActive = environment.apiURL + 'presidentialpredictions/active';
+  private urlPostPres = environment.apiURL + 'presidentialpredictions';
 
   getCurrentActive(): Observable<PresidentialPrediction> {
     return this.http.get<PresidentialPrediction>(this.urlGetActive)
