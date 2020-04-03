@@ -53,7 +53,7 @@ export class AuthComponent implements OnInit {
   changePasswordForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     token: ['', [Validators.required]],
-    password: ['', [Validators.required, Validators.minLength(8), Validators.pattern('(?=.*[a-z])(?=.*?[0-9])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,}')]],
+    password: ['', [Validators.required, Validators.minLength(8)]],
     confirmPassword: ['', [Validators.required]]
   }, {
       validator: MustMatch('password', 'confirmPassword')
