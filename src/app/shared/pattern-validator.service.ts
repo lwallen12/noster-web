@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ValidatorFn, AbstractControl } from '@angular/forms';
+import { element } from '@angular/core/src/render3';
 
 @Injectable({
   providedIn: 'root'
@@ -23,21 +24,67 @@ export class PatternValidatorService {
 //console.log("str.charAt(0) is:" + str.charCodeAt(0)); 
 //str.charAt(0) is:84 
 
- IsValidPassword(password: string): string {
-    if (password.length < 8) {
-      return "Password must be at least 8 characters";
-    }
+ IsValidPassword(password: string): string | boolean {
+    // if (password.length < 8) {
+    //   return "Password must be at least 8 characters";
+    // }
     
-    for (var i = 0; i < password.length; i++) {
-      var passArray: number[];
+    // var passArray: any[] = password.split('');
 
-      passArray.push(password.charCodeAt(i));
-      
-      //
+    var passArray: any[] = [];
 
+    // passArray.forEach(element => element = element.charCodeAt(element));
+
+    for (let i = 0; i <= password.length; i++) {
+        passArray.push(password.charCodeAt(i));
     }
+
+    console.log(passArray)
+
+    if (!this.checkForNumber(passArray)) {
+      return "Password needs a number.";
+    }
+
+    if (!this.checkForLowerCase(passArray)) {
+      return "Password needs a lowercase letter.";
+    }
+
+    if (!this.checkForUpperCase(passArray)) {
+      return "Password needs an uppercase letter.";
+    }
+
+    if (!this.checkForNonAlphaNum(passArray)) {
+      return "Password needs a special character, or a different one than the one you're using."
+    }
+
+    return true;
+
  }
 
+ //does undefined evaluate to false?
+ checkForNumber(passwordArr: number[]) {
+   if (passwordArr.find(x => (x > 47 && x < 58))) {
+     return true;
+   }
+   
+ }
 
+ checkForLowerCase(passwordArr: number[]) {
+  if (passwordArr.find(x => (x > 96 && x < 123))) {
+      return true
+  }
+ }
+
+ checkForUpperCase(passwordArr: number[]) {
+  if (passwordArr.find(x => (x > 64 && x < 91))) {
+      return true
+  }
+ }
+
+ checkForNonAlphaNum(passwordArr: number[]) {
+  if (passwordArr.find(x => (x === 33 || x === 61 || x === 64 || x ===94 || x > 34 && x < 39 || x > 39 && x < 44))) {
+    return true
+}
+ }
 
 }

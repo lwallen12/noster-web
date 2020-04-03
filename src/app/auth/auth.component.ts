@@ -24,6 +24,8 @@ export class AuthComponent implements OnInit {
   errorMessage;
   environment = environment;
 
+  passMessage;
+
   loading = false;
   
   constructor(private fb: FormBuilder, 
@@ -38,7 +40,7 @@ export class AuthComponent implements OnInit {
 
   registerForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(8), Validators.pattern('(?=.*[0-9]+.*)(?=.*[a-z]+.*)(?=.*[A-Z]+.*)(?=.*\W+.*).{8,}(?=.*[0-9]+.*)(?=.*[a-z]+.*)(?=.*[A-Z]+.*)(?=.*\W+.*).{8,}')]],
+    password: ['', [Validators.required, Validators.minLength(8)]],
     confirmPassword: ['', [Validators.required]]
   }, {
       validator: MustMatch('password', 'confirmPassword')
@@ -57,6 +59,9 @@ export class AuthComponent implements OnInit {
       validator: MustMatch('password', 'confirmPassword')
   });
 
+  validatePassword(value: string) {
+   this.passMessage = this.patternValidator.IsValidPassword(value);
+  }
 
   onSubmit() {
 

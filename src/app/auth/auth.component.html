@@ -65,7 +65,8 @@
   <label for="password">
     Password:
   </label>
-    <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls.password.errors }">
+    <input #box (keyup)="validatePassword(box.value)" type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls.password.errors }">
+    <div class="text-danger" *ngIf="passMessage!=true">{{passMessage}}</div>
     <div *ngIf="registerForm.controls.password.errors && registerForm.controls.password.dirty" class="invalid-feedback">
       <div *ngIf="registerForm.controls.password.errors?.required" class="text-danger">
           Password is required.
@@ -95,7 +96,7 @@
 </div>
 
 <div class="form-group">
-  <button [disabled]="registerForm.invalid" type="submit" class="btn btn-primary">Register</button>
+  <button [disabled]="registerForm.invalid || passMessage!=true" type="submit" class="btn btn-primary">Register</button>
   <a class="btn btn-link" (click)="startLogin()">Login</a>
   <a class="btn btn-link" (click)="startForgotPassword()">Forgot Password</a>
 </div>
