@@ -1,6 +1,5 @@
 
 <h1>Fill out your 2020 Presidential Election Prediction</h1>
-<!-- <h3>I apologize that this form lacks functionality. I started in early February and wanted to get something out here ASAP!</h3> -->
 <p>*Disclaimer: I am not trying to make a political statement with this prediction form, this is for fun and to grade your ability to 
   correctly predict the <i><b>actual</b></i> outcome of the 2020 Presidential Election... not what you would <i><b>like</b></i> the outcome to be. I included
   some pretty outlandish options (Zorp the Surveyor) if you want to be absolutely un-associated with any sort of political
@@ -30,80 +29,7 @@
 
   <div *ngIf="nowPredicting">
 
-  <div formGroupName="candidate1Info" class="container" *ngIf="can1Active">
-
-    <h2>Incumbent Ticket Prediction</h2>
-    <hr>
-
-    <div>
-        <label>Who will be the incumbent candidate?</label>
-        <div class="radio" *ngFor="let can of cans">
-          <input type="radio" formControlName="candidate1" [value]="can">{{ can }}
-        </div>
-    </div>
-
-    <div>
-      <label>What party will the incumbent president be a part of?</label>
-      <div class="radio" *ngFor="let canparty of canOneParties">
-        <input type="radio" formControlName="candidate1Party" [value]="canparty">{{ canparty }}
-      </div>
-    </div>
-
-    <div>
-      <label>Who will be the vice president on this ticket?</label>
-      <div class="radio" *ngFor="let canvp of canOneVPs">
-        <input type="radio" formControlName="candidate1VP" [value]="canvp">{{ canvp }}
-      </div>
-    </div>
-
-    <div>
-      <label>How many "Faithless Electorates" will this ticket have? <small> (This is people in the Electoral college who do not 
-        vote for the candidate the state votes for).</small></label>
-      <div>
-        <input class="test" type="number" min="0" formControlName="candidate1Faithless">
-      </div>
-    </div>
-
-    <button class="btn btn-primary" (click)="activateCan2()">Challenger Ticket Prediction >></button>
-
-<hr>
-</div>
-
-<div formGroupName="candidate2Info" class="container" *ngIf="can2Active">
-  <h2>Challenger Ticket Prediction</h2>
-  <div>
-    <label>Who will challenge the incumbent?</label>
-    <div class="radio" *ngFor="let op of opCandidates">
-      <input type="radio" formControlName="candidate2" [value]="op">{{ op }}
-    </div>
-  </div>
-
-  <div>
-    <label>Which party will this candidate belong to?</label>
-    <div class="radio" *ngFor="let party of allParties">
-      <input type="radio" formControlName="candidate2Party" [value]="party">{{ party }}
-    </div>
-  </div>
-
-  <div>
-    <label>Who will be the Vice President on this ticket?</label>
-    <div class="textbox">
-      <input type="text" class="form-control" formControlName="candidate2VP"/>
-    </div>
-  </div>
-
-  <div>
-    <label>How many "Faithless Electorates" will this ticket have? <small> (This is people in the Electoral college who do not 
-      vote for the candidate the state votes for).</small></label>
-    <div>
-      <input type="number" min="0" formControlName="candidate2Faithless">
-    </div>
-  </div>
-  <div class="btn-toolbar">
-  <button class="btn btn-primary" (click)="activateCan1()"><< Incumbent Ticket Prediction</button><button class="btn btn-primary" (click)="activateGeneral()">General Election Prediction >></button>
-</div>
-  <hr>
-</div>
+  
 
 <div formGroupName="generalInfo" class="container" *ngIf="generalActive">
   <h2>Generel Info</h2>
@@ -129,6 +55,20 @@
   </div>
 
   <div>
+    <label>How many Faithless electorates will Donald Trump have?</label>
+    <div>
+      <input type="number" formControlName="candidate1Faithless" min="0" max="500">
+    </div>
+  </div>
+
+  <div>
+    <label>How many Faithless electorates will Joe Biden have?</label>
+    <div>
+      <input type="number" formControlName="candidate2Faithless" min="0" max="500">
+    </div>
+  </div>
+
+  <div>
     <label>Describe in your own words what will happen:</label>
     <div class="textarea">
       <textarea formControlName="description" placeholder="Describe what will happen"></textarea>
@@ -142,7 +82,7 @@
     </div>
   </div>
   <div class="btn-toolbar">
-   <button class="btn btn-primary" (click)="activateCan2()"><< Challenger Ticket Prediction </button><button class="btn btn-primary" (click)="activateSwing()">Swing State Outcomes >></button>
+   <button class="btn btn-primary" (click)="activateSwing()">Swing State Outcomes >></button>
   </div> 
   <hr>
 </div>

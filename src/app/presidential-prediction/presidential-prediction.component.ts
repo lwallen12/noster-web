@@ -21,9 +21,7 @@ export class PresidentialPredictionComponent implements OnInit {
 
   presPrediction: PresidentialPrediction = new PresidentialPrediction();
 
-  can1Active: boolean = true;
-  can2Active: boolean = false;
-  generalActive: boolean = false;
+  generalActive: boolean = true;
   swingActive: boolean = false;
   stateActive: boolean = false;
 
@@ -47,12 +45,9 @@ export class PresidentialPredictionComponent implements OnInit {
     )
   }
   
-  
-  activateCan1() {this.can1Active=true;this.can2Active=false;this.generalActive=false;this.swingActive=false;this.stateActive=false;}
-  activateCan2() {this.can1Active=false;this.can2Active=true;this.generalActive=false;this.swingActive=false;this.stateActive=false;}
-  activateGeneral() {this.can1Active=false;this.can2Active=false;this.generalActive=true;this.swingActive=false;this.stateActive=false;}
-  activateSwing() {this.can1Active=false;this.can2Active=false;this.generalActive=false;this.swingActive=true;this.stateActive=false;}
-  activateState() {this.can1Active=false;this.can2Active=false;this.generalActive=false;this.swingActive=false;this.stateActive=true;}
+  activateGeneral() {this.generalActive=true;this.swingActive=false;this.stateActive=false;}
+  activateSwing() {this.generalActive=false;this.swingActive=true;this.stateActive=false;}
+  activateState() {this.generalActive=false;this.swingActive=false;this.stateActive=true;}
 
 updatePrediction() {
 
@@ -60,7 +55,7 @@ updatePrediction() {
 
   if (this.presPrediction) { 
     this.predictionForm.patchValue({
-      candidate1Info: {
+      /*candidate1Info: {
         candidate1: this.presPrediction.candidate1,
         candidate1Party: this.presPrediction.candidate1Party,
         candidate1VP: this.presPrediction.candidate1VP,
@@ -71,13 +66,15 @@ updatePrediction() {
         candidate2Party: this.presPrediction.candidate2Party,
         candidate2VP: this.presPrediction.candidate2VP,
         candidate2Faithless: this.presPrediction.candidate2FaithlessElectors
-      },
+      },*/
       generalInfo: {
         popularVoteWinner: this.presPrediction.popularVoteWinner,
         electoralVoteWinner: this.presPrediction.electoralVoteWinner,
         electionWinner: this.presPrediction.electionWinner,
+        candidate1Faithless: this.presPrediction.candidate1FaithlessElectors,
+        candidate2Faithless: this.presPrediction.candidate2FaithlessElectors,
         description: this.presPrediction.description,
-        why: this.presPrediction.why,
+        why: this.presPrediction.why
       },
       stateInfo: {
         ALVote: this.presPrediction.alVote,
@@ -142,33 +139,25 @@ onSubmit() {
   this.spinning = true;
 
   console.log(this.predictionForm.value);
-  console.log(this.predictionForm.value.candidate1Info);
-  console.log(this.predictionForm.value.candidate1Info.candidate1);
-  //console.log(this.predictionForm.value.candidate1Info.candidate1Faithless);
-  //console.log(this.predictionForm.value.candidate1Info.candidate1Party);
-
-  var x = this.predictionForm.value.candidate1Info.candidate1;
-
-//this.presPrediction.candidate1 = 'Joe';
 
 this.presPrediction = new PresidentialPrediction();
 
-this.presPrediction.candidate1 = this.predictionForm.value.candidate1Info.candidate1;
-
 console.log('Our entire object prop: ')
 console.log(this.presPrediction);
-console.log('Here is value on objectprop.can1: ' + this.presPrediction.candidate1);
 
+/*
 this.presPrediction.candidate1Party = this.predictionForm.value.candidate1Info.candidate1Party;
 this.presPrediction.candidate1VP = this.predictionForm.value.candidate1Info.candidate1VP;
-this.presPrediction.candidate1FaithlessElectors = this.predictionForm.value.candidate1Info.candidate1Faithless;
 this.presPrediction.candidate2 = this.predictionForm.value.candidate2Info.candidate2;
 this.presPrediction.candidate2Party = this.predictionForm.value.candidate2Info.candidate2Party;
 this.presPrediction.candidate2VP = this.predictionForm.value.candidate2Info.candidate2VP;
-this.presPrediction.candidate2FaithlessElectors = this.predictionForm.value.candidate2Info.candidate2Faithless;
+*/
+
 this.presPrediction.popularVoteWinner = this.predictionForm.value.generalInfo.popularVoteWinner;
 this.presPrediction.electoralVoteWinner = this.predictionForm.value.generalInfo.electoralVoteWinner;
 this.presPrediction.electionWinner = this.predictionForm.value.generalInfo.electionWinner;
+this.presPrediction.candidate1FaithlessElectors = this.predictionForm.value.generalInfo.candidate1Faithless;
+this.presPrediction.candidate2FaithlessElectors = this.predictionForm.value.generalInfo.candidate2Faithless;
 this.presPrediction.description = this.predictionForm.value.generalInfo.description;
 this.presPrediction.why = this.predictionForm.value.generalInfo.why;
 this.presPrediction.alVote = this.predictionForm.value.stateInfo.ALVote;
@@ -224,9 +213,6 @@ this.presPrediction.wyVote = this.predictionForm.value.stateInfo.WYVote;
 
 console.log(this.predictionForm.value.stateInfo.WYVote);
 
-  //this.presPrediction = this.predictionForm.value;
-  //this.presPrediction.candidate1 = this.predictionForm.value.candidate1Info.candidate1;
-
   this.presPredService.postPrediction(this.presPrediction).subscribe(
     (res) => {
       //console.log('HEre is our prediction: ' + res);
@@ -236,27 +222,12 @@ console.log(this.predictionForm.value.stateInfo.WYVote);
   )
 }
 
-  cans: string[] = ['Donald Trump', 'Mike Pence', 'Zorp the Surveyor', 'Other'];
-  canOneParties: string[] = ['Republican', 'Democrat', 'Independent', 'Other'];
-  canOneVPs: string[] = ['Mike Pence', 'Other', 'Herb Scaifer'];
-
-  canTwos: string[] = ['Bernie', 'Buhda Judge', 'Liz Warren'];
-  canTwoParties: string[] = ['Democrat', 'Independent', 'Coomunist', 'Tea Party', 'Anarchist', 'Polar Regions', 'Republican'];
-  canTwoVPs: string[] = ['Steve Martin', 'Beto', 'AOC'];
-
-
-  electionWinners: string[] = ['Donald Trump','Pete Buttigieg','Bernie Sanders','Elizabeth Warren','Amy Klobuchar',
-  'Joe Biden','Andrew Yang','Michael Bloomberg','Kamala Harris','Hillary Clinton', 'Mike Pence', 'Herb Scaifer', 'Zeke Schrute', 'Zorp the Surveyor '];
-
-  parties: string[] = ['Democrat', 'Independent', 'Coomunist', 'Tea Party', 'Anarchist', 'Polar Regions', 'Republican'];
-
-
+  electionWinners: string[] = ['Donald Trump', 'Joe Biden', 'Herb Scaifer', 'Zeke Schrute', 'Zorp the Surveyor '];
   allParties: string[] = ['Democrat', 'Republican', 'Independent or Minor Party', 'The Reasonabilists']
-  opCandidates: string[] = ['Pete Buttigieg','Bernie Sanders','Elizabeth Warren','Amy Klobuchar',
-    'Joe Biden','Andrew Yang','Michael Bloomberg','Kamala Harris','Hillary Clinton', 'Zeke Schrute']
+ 
 
   predictionForm = this.fb.group({
-    candidate1Info: this.fb.group({
+   /* candidate1Info: this.fb.group({
       candidate1: new FormControl({value: 'Donald Trump', disabled: false}),
       candidate1Party: new FormControl({value: 'Republican', disabled: false}),
       candidate1VP: new FormControl({value: 'Mike Pence', disabled: false}),
@@ -267,11 +238,13 @@ console.log(this.predictionForm.value.stateInfo.WYVote);
       candidate2Party: new FormControl({value: this.myvar, disabled: false}),
       candidate2VP: [''],
       candidate2Faithless: [''],
-    }),
+    }), */
     generalInfo: this.fb.group({
       popularVoteWinner: [''],
       electoralVoteWinner: [''],
       electionWinner: [''],
+      candidate1Faithless: new FormControl({value: 0}),
+      candidate2Faithless: new FormControl({value: 0}),
       description: [''],
       why: [''],
     }),
