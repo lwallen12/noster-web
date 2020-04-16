@@ -13,15 +13,18 @@ export class AuthGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         
-
+        //Need to remove current user and logout if go idle..
+        //Need to effectively refresh the token
+        //Should we also check if the local storage is expired
+        
 
         if (localStorage.getItem('currentUser'))  {
-            // authorised so return true
+            //Should not just be authorized if there is a user object... or maybe.. but when no longer 
+            //a valid token, this should be made null?
             return true;
         }
 
-        // not logged in so redirect to login page with the return url
-        //this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
+        
         this.router.navigate(['/auth']);
         return false;
     }

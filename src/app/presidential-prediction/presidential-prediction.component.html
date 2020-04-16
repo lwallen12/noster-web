@@ -8,11 +8,6 @@
 
 <form [formGroup]="predictionForm" (ngSubmit)="onSubmit()">
 
-  <p>My goal (still in progress) is to allow any possible grade-able prediction. So if you are wondering why Donald Trump 
-    is not a given, what if he decided to one day this year he'd rather just pack up and go home? Who would be the
-    replacement? 
-  </p>
-
     <div *ngIf="!nowPredicting" class="container">
       <button type="button" class="btn btn-primary container" *ngIf="!presPrediction" (click)="updatePrediction()">Start Predicting!</button>
 

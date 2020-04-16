@@ -5,6 +5,10 @@ import { map, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { environment } from '../environments/environment';
 
+
+import * as jwt_decode from "jwt-decode";
+import { getLocaleDateTimeFormat } from '@angular/common';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -20,38 +24,16 @@ export class AuthService {
 login(login: Login) {
   return this.http.post<string>(environment.apiURL + 'accounts/login', login, {headers:{ 'Content-Type': 'application/json' }, 
   responseType:'text' as 'json' })
-  .pipe(map(user => {
-    catchError(this.handleError),
-    // store user details and jwt token in local storage to keep user logged in between page refreshes
-    localStorage.setItem('currentUser', user);
-    this.currentUserSubject.next(user);
-    console.log(user);
-    return user;
-  }));
-}
-
-register(login: Login) {
-  return this.http.post<string>(environment.apiURL + 'accounts/register', login, {headers:{ 'Content-Type': 'application/json' }, 
-  responseType:'text' as 'json' })
-    .pipe(
+  .pipe(
+    map(user => {
       catchError(this.handleError),
-      map(user => {
-        localStorage.setItem('currentUser', user);
-        this.currentUserSubject.next(user);
-        console.log(user);
-        return user;
-      }
-    )
-  );
-}
-
-reset(user: UserSet) {
-  return this.http.post<string>(environment.apiURL + 'accounts/reset', user);
-}
-
-changePassword(user: UserChange) {
-  //TODO: Make call to change Password in API
-  return this.http.post<any>(environment.apiURL + 'accounts/change', user)
+      // store user details and jwt token in local storage to keep user logged in between page refreshes
+      localStorage.setItem('currentUser', user);
+      this.currentUserSubject.next(user);
+      //this.setLogout();
+      console.log(user);
+      return user;
+  }));
 }
 
 logout() {
@@ -62,17 +44,28 @@ logout() {
   this.router.navigate(['/auth']); 
 }
 
-getAuthorizationToken() {
-    return localStorage.getItem('currentUser');
-  }
+//Maybe in login and in refresh... this is where we would set the timeout???
+//And then everytime after login, register and subsequent refresh.... the timeout would be reworked?
+//And then on logout end the settimeout method
 
-//Just to test auth and intereptor work
-getProtected() {
-  return this.http.get<any>(environment.apiURL + 'accounts/protected');
+register(login: Login) {
+  return this.http.post<string>(environment.apiURL + 'accounts/register', login, {headers:{ 'Content-Type': 'application/json' }, 
+  responseType:'text' as 'json' })
+    .pipe(
+      catchError(this.handleError),
+      map(user => {
+        localStorage.setItem('currentUser', user);
+        this.currentUserSubject.next(user);
+        console.log(user);
+        //this.setLogout();
+        return user;
+      }
+    )
+  );
 }
 
 refreshToken() {
-  return this.http.post<any>(environment.apiURL + "refresh", null, 
+  return this.http.post<any>(environment.apiURL + "accounts/refresh", null, 
     {headers:{ 'Authorization': 'Bearer ' + this.getAuthorizationToken() }, 
   responseType:'text' as 'json' })
     .pipe(
@@ -81,10 +74,28 @@ refreshToken() {
         localStorage.setItem('currentUser', user);
         this.currentUserSubject.next(user);
         console.log("new user should be: " + user);
-       return user;
+        //this.setLogout();
+        return user;
     }));
   }
 
+reset(user: UserSet) {
+  return this.http.post<string>(environment.apiURL + 'accounts/reset', user);
+}
+
+changePassword(user: UserChange) {
+  //TODO: Make call to change Password in API
+  return this.http.post<any>(environment.apiURL + 'accounts/change', user)
+}
+
+getAuthorizationToken() {
+    return localStorage.getItem('currentUser');
+  }
+
+//Just to test auth and intereptor work
+getProtected() {
+  return this.http.get<any>(environment.apiURL + 'accounts/protected');
+}
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -102,6 +113,32 @@ refreshToken() {
     return throwError(
       'Something bad happened; please try again later.');
   };
+
+
+
+
+  setLogout() {      
+    setTimeout(() => {
+        //maybe retrieve the token and see if it is past time?
+
+        var currentToken = localStorage.getItem('currentUser');
+        let t: number = jwt_decode(currentToken);
+
+        var expDate = new Date(t['exp'] * 1000);
+        var dateNow = new Date();
+
+        console.log("Token expiration: " + expDate);
+        console.log("Current DateTime: " + dateNow);
+        console.log("Token exp as a number: " + t['exp'] * 1000);
+        console.log("Currt tim as a number: " + dateNow.valueOf());
+
+        if (dateNow.valueOf() > (t['exp'] * 1000)) {
+          this.logout();
+        }
+       
+      }, 3000); 
+  }
+
 
 }
 

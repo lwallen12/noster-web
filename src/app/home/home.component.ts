@@ -3,7 +3,7 @@ import { AuthService } from '../auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgIdleKeepaliveModule, Keepalive } from '@ng-idle/keepalive';
 import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
@@ -19,13 +19,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   resourceSection = false;
   instructionSection = false;
 
+
   environment = environment;
 
   now;
   expiresIn;
   authorizedTime;
-
-  uselessMessage = "This is from within setTimeout. We are calling refresh token endpoint!";
 
   idleState = 'Not started.';
   timedOut = false;
@@ -43,12 +42,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     private idle: Idle, 
     private ngZone: NgZone,
     private keepalive: Keepalive) {
-      
-  this.route.url.subscribe(data =>
-      console.log(data));
 
-    idle.setIdle(1200); //1200 for 20 minutes
-    // sets a timeout period of 5 seconds. after 10 seconds of inactivity, the user will be considered timed out.
+      //I think goes idle after 20 seconds
+    idle.setIdle(20); //1200 for 20 minutes
+    // sets a timeout period of x seconds. after x seconds of inactivity, the user will be considered timed out.
     idle.setTimeout(60);
     // sets the default interrupts, in this case, things like clicks, scrolls, touches to the document
     idle.setInterrupts(DEFAULT_INTERRUPTSOURCES);
@@ -60,32 +57,31 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.onTimeout();
 
     // sets the ping interval to 15 seconds
-    keepalive.interval(15);
+    // keepalive.interval(15);
 
-    keepalive.onPing.subscribe(() => this.lastPing = new Date());
+    // keepalive.onPing.subscribe(() => this.lastPing = new Date());
 
     this.idle.watch();
 
      }
 
-     onIdleEnd() {
-      this.idle.onIdleEnd.subscribe(() => { 
-      this.idleState = 'No longer idle.'
-      console.log(this.idleState);
-      this.reset();
-      this.isIdle = false;
-
-      this.router.navigate(['/home'])
+     onIdleStart() {
+      this.idle.onIdleStart.subscribe(() => {
+        this.idleState = 'You\'ve gone idle!'
+        console.log(this.idleState);
+        this.isIdle = true;
     });
   }
 
-  onIdleStart() {
-    this.idle.onIdleStart.subscribe(() => {
-      this.idleState = 'You\'ve gone idle!'
-      console.log(this.idleState);
-      this.isIdle = true;
-  });
-  }
+     onIdleEnd() {
+      this.idle.onIdleEnd.subscribe(() => { 
+        this.idleState = 'No longer idle.'
+        this.reset();
+        this.isIdle = false;
+
+        this.router.navigate(['/home'])
+      });
+    }
 
   onTimeoutWarning() {
     this.idle.onTimeoutWarning.subscribe((countdown) => {
@@ -108,22 +104,22 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.idleState = 'Started.';
   }
 
-//You need to use ArrowFunction ()=> to preserve this context within setTimeout
-mySetInterval() {      
-  console.log("Hello from mySetTimeout before setTimeout in code");
-  this.myInterval = setInterval (() => {
-        console.log(this.uselessMessage);
+//Possibly unsubscribe if logout.. otherwise this keeps running?
+//but refresh endpoint not gettig found?
+tryRefresh() {      
+  this.myInterval = setInterval(() => {
       //TODO: Refresh, if not idle
-      if (!this.isIdle) {
-        var token =  this.authService.refreshToken().subscribe(
+      //if (!this.isIdle) {
+        if (!this.timedOut) {
+        this.authService.refreshToken().subscribe(
           data => {
-            console.log(data)
           }
         );
-        console.log(token);
       }
-      
-    }, 300000); //chanage to 3000 if you wanna see it quicker that the 5 min (300,000)
+      else {
+        this.onLogout();
+      }
+    }, 15000); //chanage to 3000 if you wanna see it quicker that the 5 min (300,000)
   console.log("Hello from mySetTimeout after setTimeout in code");
 }
 
@@ -133,7 +129,7 @@ mySetInterval() {
 
   ngOnInit() {
     this.currentURL = this.router.url;
-    this.mySetInterval();
+    this.tryRefresh();
   }
 
   updateDropDown() {
@@ -154,7 +150,8 @@ mySetInterval() {
   
 
   ngOnDestroy(): void {
-
+    //Not really working.. the refresh endpoint is still being called when I logout
+      //this.refreshSub.unsubscribe();
   }
 
 
