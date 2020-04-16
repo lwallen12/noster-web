@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private keepalive: Keepalive) {
 
       //I think goes idle after 20 seconds
-    idle.setIdle(20); //1200 for 20 minutes
+    idle.setIdle(300); //1200 for 20 minutes
     // sets a timeout period of x seconds. after x seconds of inactivity, the user will be considered timed out.
     idle.setTimeout(60);
     // sets the default interrupts, in this case, things like clicks, scrolls, touches to the document
@@ -119,7 +119,7 @@ tryRefresh() {
       else {
         this.onLogout();
       }
-    }, 15000); //chanage to 3000 if you wanna see it quicker that the 5 min (300,000)
+    }, 300000); //chanage to 3000 if you wanna see it quicker that the 5 min (300,000)
   console.log("Hello from mySetTimeout after setTimeout in code");
 }
 
