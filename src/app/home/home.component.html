@@ -7,16 +7,40 @@
     <p>Make predictions, see scores and see what others have predicted!</p>
 
     <div class="sector">
-      <div class="notif" (click)="updateDropDown()">Updates ></div>
-      <p *ngIf="updateSection">Information on Updates</p>
-      <div class="notif" (click)="highScoreDropDown()">High Scores ></div>
-      <p *ngIf="highScoreSection">Info on High Scores</p>
-      <div class="notif" (click)="resourceDropDown()">Resources ></div>
-      <p *ngIf="resourceSection">Info on Information/Resources</p>
       <div class="notif" (click)="instructionDropDown()">Instructions ></div>
-      <p *ngIf="instructionSection">Info on Insrtuctions</p>
+      <div class="news-section" *ngIf="instructionSection">
+        <h4>Instructions</h4>
+        <p>To make a prediction, click on the 'Predict' drop-down, and select the event that you would like to
+          make a prediction for. You can make as many updates as you would like until the event actually takes
+          place!
+        </p>
+      </div>
+      <div class="notif" (click)="resourceDropDown()">Resources ></div>
+      <div class="news-section" *ngIf="resourceSection">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="https://fivethirtyeight.com/sports/" target="_blank">FiveThirtyEight (Affliated with ABC News)</a></li>
+          <li><a href="https://www.sports-reference.com/" target="_blank">Sports-Reference.com</a></li>
+          <li><a href="https://www.statista.com/" target="_blank">Statista.com</a></li>
+        </ul>
+      </div>
+      <div class="notif" (click)="highScoreDropDown()">High Scores ></div>
+      <div class="news-section" *ngIf="highScoreSection">
+        <h4>High Scores</h4>
+        <p>High scores would be listed here.. but there are no predictions ready to be graded. Track
+          this in the updates section!
+        </p>
+      </div>
+      <div class="notif" (click)="updateDropDown()">Updates ></div>
+      <div class="news-section" *ngIf="updateSection">
+        <h4>Updates</h4>
+        <ul>
+          <li>Version 2.0: Will allow predictions for MLB 2020 Post-Season.</li>
+          <li>Version 2.1: Will allow active predictions to be searched and viewed.</li>
+          <li>Version 2.2: Will score predictions which have been made.</li>
+        </ul>
+      </div>
     </div>
-    
   </div>
   <p><small>{{environment.version}}</small></p>
 </div>
