@@ -115,32 +115,40 @@ getProtected() {
   };
 
 
+  checkExpiration() {
 
+    let currentToken = localStorage.getItem('currentUser');
+    let t: number = jwt_decode(currentToken);
 
-  setLogout() {      
-    setTimeout(() => {
-        //maybe retrieve the token and see if it is past time?
+    let expDate = new Date(t['exp'] * 1000);
+    let dateNow = new Date();
 
-        var currentToken = localStorage.getItem('currentUser');
-        let t: number = jwt_decode(currentToken);
+    console.log("Token expiration: " + expDate);
+    console.log("Current DateTime: " + dateNow);
+    console.log("Token exp as a number: " + t['exp'] * 1000);
+    console.log("Currt tim as a number: " + dateNow.valueOf());
 
-        var expDate = new Date(t['exp'] * 1000);
-        var dateNow = new Date();
-
-        console.log("Token expiration: " + expDate);
-        console.log("Current DateTime: " + dateNow);
-        console.log("Token exp as a number: " + t['exp'] * 1000);
-        console.log("Currt tim as a number: " + dateNow.valueOf());
-
-        if (dateNow.valueOf() > (t['exp'] * 1000)) {
-          this.logout();
-        }
-       
-      }, 3000); 
+    dateNow.valueOf() > (t['exp'] * 1000) ? this.logout() : console.log("valid");
   }
 
+  isExpired(): boolean {
+
+    let currentToken = localStorage.getItem('currentUser');
+    let t: number = jwt_decode(currentToken);
+
+    let expDate = new Date(t['exp'] * 1000);
+    let dateNow = new Date();
+
+    console.log("Token expiration: " + expDate);
+    console.log("Current DateTime: " + dateNow);
+    console.log("Token exp as a number: " + t['exp'] * 1000);
+    console.log("Currt tim as a number: " + dateNow.valueOf());
+
+    return dateNow.valueOf() > (t['exp'] * 1000) ? true : false;
+  }
 
 }
+
 
 
 export class Login {

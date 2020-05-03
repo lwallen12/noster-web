@@ -18,9 +18,12 @@ export class AuthGuard implements CanActivate {
         //Should we also check if the local storage is expired
         
 
-        if (localStorage.getItem('currentUser'))  {
+        if (localStorage.getItem('currentUser')) {
             //Should not just be authorized if there is a user object... or maybe.. but when no longer 
-            //a valid token, this should be made null?
+            //a valid token, should remove the currentUser object and basically logout.. seems to work 
+            if (this.authenticationService.isExpired()) {
+                this.authenticationService.logout();
+            }
             return true;
         }
 

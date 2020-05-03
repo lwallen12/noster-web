@@ -44,9 +44,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     private keepalive: Keepalive) {
 
       //I think goes idle after 20 seconds
-    idle.setIdle(300); //1200 for 20 minutes
+    idle.setIdle(30); //1200 for 20 minutes
     // sets a timeout period of x seconds. after x seconds of inactivity, the user will be considered timed out.
-    idle.setTimeout(60);
+    idle.setTimeout(10);
     // sets the default interrupts, in this case, things like clicks, scrolls, touches to the document
     idle.setInterrupts(DEFAULT_INTERRUPTSOURCES);
 
@@ -108,18 +108,13 @@ export class HomeComponent implements OnInit, OnDestroy {
 //but refresh endpoint not gettig found?
 tryRefresh() {      
   this.myInterval = setInterval(() => {
-      //TODO: Refresh, if not idle
-      //if (!this.isIdle) {
-        if (!this.timedOut) {
+        if (this.isIdle == false) {
         this.authService.refreshToken().subscribe(
-          data => {
-          }
+
         );
       }
-      else {
-        this.onLogout();
-      }
-    }, 300000); //chanage to 3000 if you wanna see it quicker that the 5 min (300,000)
+
+    }, 3000); //chanage to 3000 if you wanna see it quicker that the 5 min (300,000)
   console.log("Hello from mySetTimeout after setTimeout in code");
 }
 
