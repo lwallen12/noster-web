@@ -18,10 +18,10 @@ import { IdleComponent } from './modals/idle.component';
 
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { LoadingComponent } from './modals/loading.component';
-import { BrowseModule } from './browse/browse.module';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { BlankHeaderComponent } from './blank-header/blank-header.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { BrowseComponent } from './browse/browse.component';
 
 
 @NgModule({
@@ -38,7 +38,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     LoadingComponent,
     SpinnerComponent,
     BlankHeaderComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    BrowseComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +49,6 @@ import { NotFoundComponent } from './not-found/not-found.component';
     HttpClientModule,
     NgIdleKeepaliveModule.forRoot(),
     MomentModule,
-    BrowseModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, 
     useClass: AuthInterceptor, multi: true}],
