@@ -21,6 +21,8 @@ export class AuthService {
     this.currentUser = this.currentUserSubject.asObservable();
 }
 
+isLoggedIn: boolean = false;
+
 login(login: Login) {
   return this.http.post<string>(environment.apiURL + 'accounts/login', login, {headers:{ 'Content-Type': 'application/json' }, 
   responseType:'text' as 'json' })
@@ -30,7 +32,7 @@ login(login: Login) {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
       localStorage.setItem('currentUser', user);
       this.currentUserSubject.next(user);
-      //this.setLogout();
+      // this.scheduleRefreshToken();
       console.log(user);
       return user;
   }));
@@ -44,10 +46,16 @@ logout() {
   this.router.navigate(['/auth']); 
 }
 
+// scheduleRefreshToken() {
+//   setInterval(() => {
+//     this.refreshToken();
+//     console.log("REFRESH!!")
+//   }, 3000)
+// }
+
 //Maybe in login and in refresh... this is where we would set the timeout???
 //And then everytime after login, register and subsequent refresh.... the timeout would be reworked?
 //And then on logout end the settimeout method
-
 register(login: Login) {
   return this.http.post<string>(environment.apiURL + 'accounts/register', login, {headers:{ 'Content-Type': 'application/json' }, 
   responseType:'text' as 'json' })
@@ -65,7 +73,9 @@ register(login: Login) {
 }
 
 refreshToken() {
-  return this.http.post<any>(environment.apiURL + "accounts/refresh", null, 
+  //How to not run this if I am logged out!
+   if (localStorage.getItem("currentUser")) {
+    return this.http.post<any>(environment.apiURL + "accounts/refresh", null, 
     {headers:{ 'Authorization': 'Bearer ' + this.getAuthorizationToken() }, 
   responseType:'text' as 'json' })
     .pipe(
@@ -77,6 +87,7 @@ refreshToken() {
         //this.setLogout();
         return user;
     }));
+    }
   }
 
 reset(user: UserSet) {
