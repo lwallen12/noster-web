@@ -7,11 +7,12 @@ import { WorldSeriesComponent } from './world-series/world-series.component';
 import { AuthComponent } from './auth/auth.component';
 import { AuthGuard } from "./auth/auth-guard";
 import { NotFoundComponent } from './not-found/not-found.component';
+import { BrowseComponent } from './browse/browse.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
-    {path: 'browse', loadChildren: () => import('./browse/browse.module').then(m => m.BrowseModule)},
+    {path: 'browse', component: BrowseComponent},
     {path: 'presidentialprediction', component: PresidentialPredictionComponent},
     {path: 'scores', component: ScoresComponent},
     {path: 'worldseries', component: WorldSeriesComponent}
