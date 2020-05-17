@@ -19,6 +19,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   resourceSection = false;
   instructionSection = false;
 
+  mobilePredictionSection = false;
+
 
   environment = environment;
 
@@ -141,6 +143,10 @@ tryRefresh() {
 
   instructionDropDown() {
     this.instructionSection = !this.instructionSection;
+  }
+
+  mobileSectionPredictionDropdown() {
+    this.mobilePredictionSection = !this.mobilePredictionSection;
   }
   
 

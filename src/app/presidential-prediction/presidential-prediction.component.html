@@ -83,7 +83,7 @@
 </div>
 
 <div formGroupName="swingStateInfo" class="container" *ngIf="swingActive">
-  <h2 class="container">Select who will win the vote in each state.</h2>
+  <h2 class="container">Swing State Selection</h2>
   <h5>*Default value is 2016 result. If you want to skip these, you absolutely can.</h5>
   <div>
     <label>Ohio Winner:</label>
@@ -142,7 +142,7 @@
   <hr>
 
 <div formGroupName="stateInfo" class="container" *ngIf="stateActive">
-  <h2 class="container">State Winners</h2>
+  <h2 class="container">State Winner Selection</h2>
 <h5>*Default value is 2016 result. If you want to skip these, you absolutely can.</h5>
   <div>
     <label>Alabama Winner:</label>
@@ -438,16 +438,11 @@
     </div>
   </div>
   <button class="btn btn-primary" (click)="activateSwing()"><< Swing State Outcomes</button>
+  <button type="submit" class="btn btn-primary container" [disabled]="!predictionForm.valid">Submit</button>
 </div>
 <div class="container" *ngIf="spinning">
   <app-spinner></app-spinner>
 </div>
-<button type="submit" class="btn btn-primary container" [disabled]="!predictionForm.valid">Submit</button> 
-
-
-
-
-
 
 </div>
 

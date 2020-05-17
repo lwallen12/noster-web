@@ -1,8 +1,37 @@
 <app-header></app-header>
+
+<button class="send-home lone-button" *ngIf="myOutlet.isActivated">
+  <a style="color:white" routerLinkActive="active" routerLink="/home">Home</a>
+</button>
+
 <div class="container">
   <router-outlet  #myOutlet="outlet"></router-outlet>
   <!-- {{myOutlet.isActivated}} -->
-  <div *ngIf="!myOutlet.isActivated">
+
+  <div id="small" *ngIf="!myOutlet.isActivated">
+    <h1>Welcome to iNostradamus!</h1>
+    <p>Make predictions, see scores and see what others have predicted!</p>
+
+    <div class="sector">
+      <div class="small-navigator" (click)="mobileSectionPredictionDropdown()">Make a Prediction</div>
+      <div *ngIf="mobilePredictionSection" class="container">
+        <div class="container">
+          <button class="btn btn-primary spaced">
+             <a style="color:white;" routerLinkActive="active" routerLink="presidentialprediction">2020 Presidential Election</a>
+          </button>
+        </div>
+        <div class="container">
+          <button class="btn btn-primary spaced">
+            <a style="color:white;" routerLinkActive="active" routerLink="worldseries">2020 MLB Post-Season</a>
+          </button>
+        </div>
+      </div>
+      <div class="small-navigator"><a style="color:black;" routerLinkActive="active" routerLink="scores">View High Scores</a></div>
+      <div class="small-navigator"><a style="color:black;" routerLinkActive="active" routerLink="browse">Browse Predictions</a></div>
+    </div>
+  </div>
+
+  <div id="home" *ngIf="!myOutlet.isActivated">
     <h1>Welcome to iNostradamus!</h1>
     <p>Make predictions, see scores and see what others have predicted!</p>
 
