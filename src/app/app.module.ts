@@ -22,6 +22,8 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { BlankHeaderComponent } from './blank-header/blank-header.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { BrowseComponent } from './browse/browse.component';
+import { SocialComponent } from './social/social.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { BrowseComponent } from './browse/browse.component';
     SpinnerComponent,
     BlankHeaderComponent,
     NotFoundComponent,
-    BrowseComponent
+    BrowseComponent,
+    SocialComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

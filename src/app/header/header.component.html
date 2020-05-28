@@ -7,6 +7,7 @@
       <ul class="nav navbar-nav">
         <li routerLinkActive="active"><a routerLink="/home">Home</a></li>
         <li routerLinkActive="active"><a routerLink="scores">Scores</a></li>
+        <li routerLinkActive="active"><a routerLink="social">Social</a></li>
         <li routerLinkActive="active"><a routerLink="browse">Browse Predictions</a></li>
         <li appDropdown class="dropdown">
           <a class="dropdown-toggle">Predict<span class="caret"></span></a>
@@ -16,9 +17,10 @@
           </ul>
         </li>
       </ul>
-      <ul class="nav navbar-nav navbar-right" (click)="onLogout()">
+      <ul class="nav navbar-nav navbar-right">
+        <li routerLinkActive="active"><a routerLink="profile">Profile</a></li>
         <li>
-          <a>Logout</a>
+          <a (click)="onLogout()">Logout</a>
         </li>
       </ul>
     </div>

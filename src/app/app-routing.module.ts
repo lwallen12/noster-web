@@ -8,13 +8,17 @@ import { AuthComponent } from './auth/auth.component';
 import { AuthGuard } from "./auth/auth-guard";
 import { NotFoundComponent } from './not-found/not-found.component';
 import { BrowseComponent } from './browse/browse.component';
+import { ProfileComponent } from './profile/profile.component';
+import { SocialComponent } from './social/social.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
     {path: 'browse', component: BrowseComponent},
-    {path: 'presidentialprediction', component: PresidentialPredictionComponent},
     {path: 'scores', component: ScoresComponent},
+    {path: 'profile', component: ProfileComponent},
+    {path: 'social', component: SocialComponent},
+    {path: 'presidentialprediction', component: PresidentialPredictionComponent},
     {path: 'worldseries', component: WorldSeriesComponent}
     ]},
   {path: 'auth', component: AuthComponent},
