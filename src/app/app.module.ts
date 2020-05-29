@@ -24,6 +24,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { BrowseComponent } from './browse/browse.component';
 import { SocialComponent } from './social/social.component';
 import { ProfileComponent } from './profile/profile.component';
+import { MessagesComponent } from './messages/messages.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { ProfileComponent } from './profile/profile.component';
     NotFoundComponent,
     BrowseComponent,
     SocialComponent,
-    ProfileComponent
+    ProfileComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
