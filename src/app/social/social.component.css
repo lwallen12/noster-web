@@ -7,17 +7,18 @@ input {
     margin: 2px;
 }
 
-.page-wrapper {
+/* .page-wrapper {
     
     border: 5px solid red; 
-    /* height: 100%; */
-}
+    height: 100%;
+} */
 
 .row {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 100%;
+    border: 5px solid black;
+    /* width: 100%; */
 }
 
 .column {
@@ -27,7 +28,7 @@ input {
     flex: 1;
     margin: 2%;
     margin-left: 0;
-    border-left: 5px solid black;
+    /* border-left: 5px solid black; */
     
 }
 
@@ -45,16 +46,16 @@ input {
 .blue-column {
     height: 1000px;
     flex: 2;
-    padding: 5%;
+    /* padding: 5%; */
     overflow:scroll;
-    border: 6px solid blue;
+    /* border: 6px solid blue; */
   }
 
   .green-column {
     height: 1000px;
     padding: 5%;
     overflow:scroll;
-    border: 6px solid orange;
+    /* border: 6px solid orange; */
   }
 
   .friend-card {
@@ -76,4 +77,9 @@ input {
   .score {
       padding-left: 1%;
       padding-right: 1%;
+  }
+
+
+  .somespace {
+      margin: 6px;
   }

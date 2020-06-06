@@ -7,6 +7,8 @@ export class NosterRelation {
     private _relationStatus : string;
     private _relationType : string;
 
+    //I think should probably have display name and related displayname
+
     public get userName() : string {
         return this._userName;
     }

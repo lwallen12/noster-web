@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RelationService } from '../relation.service';
+import { NosterRelation } from '../models/noster-relation';
 
 @Component({
   selector: 'app-social',
@@ -7,9 +9,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SocialComponent implements OnInit {
 
-  constructor() { }
+  constructor(private nosterRelationService: RelationService) { }
 
   ngOnInit() {
+
+    this.onGetMyFriends();
+
+  }
+
+  motto = "Filler motto";
+  scoreTotal = 0;
+  mlbScore = 0;
+  presScore = 0;
+  freindName = "Boblee";
+
+  //Get this from a service, this will basically be each freind card
+  freinds: NosterRelation[] = [];
+
+  onGetMyFriends() {
+    this.nosterRelationService.getMyFriends().subscribe(
+      data =>  {
+        this.freinds = data;
+        console.log(data);
+      }
+    );
   }
 
 }
