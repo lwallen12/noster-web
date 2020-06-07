@@ -56,8 +56,8 @@ logout() {
 //Maybe in login and in refresh... this is where we would set the timeout???
 //And then everytime after login, register and subsequent refresh.... the timeout would be reworked?
 //And then on logout end the settimeout method
-register(login: Login) {
-  return this.http.post<string>(environment.apiURL + 'accounts/register', login, {headers:{ 'Content-Type': 'application/json' }, 
+register(register: Register) {
+  return this.http.post<string>(environment.apiURL + 'accounts/register', register, {headers:{ 'Content-Type': 'application/json' }, 
   responseType:'text' as 'json' })
     .pipe(
       catchError(this.handleError),
@@ -173,4 +173,10 @@ export class UserChange {
   username: string;
   resetToken: string;
   newPassword: string;
+}
+
+export class Register {
+  email: string;
+  password: string;
+  displayName: string;
 }

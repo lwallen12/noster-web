@@ -60,6 +60,24 @@
       </div>
     </div>
   </div>
+
+  <div class="form-group">
+    <label for="displayName">
+      Display Name:
+    </label>
+    <input type="text" formControlName="displayName" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls.displayName.errors }">
+    <div *ngIf="registerForm.controls.displayName.errors && registerForm.controls.displayName.dirty" class="invalid-feedback">
+      <div *ngIf="registerForm.controls.displayName.errors?.required" class="text-danger">
+        Display Name is required.
+      </div>
+      <div *ngIf="registerForm.controls.displayName.errors?.minlength" class="text-danger">
+        Display Name must be at least 5 characters.
+      </div>
+      <div *ngIf="registerForm.controls.displayName.errors?.maxlength" class="text-danger">
+        Display Name can not be that long.
+      </div>
+    </div>
+  </div>
  
 <div class="form-group">
   <label for="password">

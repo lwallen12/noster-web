@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MustMatch } from '../shared/must-match';
 import { Validators } from '@angular/forms';
-import { AuthService, Login, UserSet, UserChange } from '../auth.service';
+import { AuthService, Login, UserSet, UserChange, Register } from '../auth.service';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { PatternValidatorService } from '../shared/pattern-validator.service';
@@ -40,6 +40,7 @@ export class AuthComponent implements OnInit {
 
   registerForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
+    displayName: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(30)]],
     password: ['', [Validators.required, Validators.minLength(8)]],
     confirmPassword: ['', [Validators.required]]
   }, {
@@ -97,10 +98,13 @@ export class AuthComponent implements OnInit {
 
     this.loading = true;
 
-    let register: Login = {
+    let register: Register = {
       email: this.registerForm.value.email,
-      password: this.registerForm.value.password
+      password: this.registerForm.value.password,
+      displayName: this.registerForm.value.displayName
     }
+
+    console.log(register);
 
     this.authService.register(register)
       .pipe(first())
