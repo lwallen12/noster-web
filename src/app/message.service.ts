@@ -17,4 +17,8 @@ export class MessageService {
     return this.http.get<NosterMessage>(this.urlBase);
   }
 
+  getThisConvo(displayName: string): Observable<NosterMessage> {
+    return this.http.get<NosterMessage>(this.urlBase + displayName);
+  }
+
 }

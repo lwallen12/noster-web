@@ -1,29 +1,31 @@
 <h2><i>*In progress, still looking at if I want to do this.</i></h2>
 
 <!-- <div>search</div> -->
-<div class="page-wrapper">
+<!-- <div class="page-wrapper"> -->
   <!-- <div class="form-group">
   <a class="btn btn-link">My Friends</a><a class="btn btn-link">---All</a><a class="btn btn-link">---Pending</a><a class="btn btn-link">---Search Network</a>
 </div> -->
 <div>
-  <button class="btn btn-primary lit-space" type="button">
+  <button (click)="onClickFreindMode()" class="btn btn-primary lit-space" type="button">
     <i class="fa fa-search">Friends</i>
   </button>
-  <button class="btn btn-primary lit-space" type="button">
+  <button (click)="onClickPendingMode()" class="btn btn-primary lit-space" type="button">
     <i class="fa fa-search">Pending</i>
   </button>
-  <button class="btn btn-primary lit-space" type="button">
+  <button (click)="onClickNetworkMode()" class="btn btn-primary lit-space" type="button">
     <i class="fa fa-search">Network</i>
   </button>
 </div>
 <div><input type="text" class="form-control somespace" placeholder="Type to Search"></div>
-  <div class='row'>
+
+
+  <!-- <div class='row'>
     <div class='column-wide'>
       <div class='blue-column'>
         <div class="friend-list yellow-oline">
           <h1 style="text-align: center;">Friends</h1>
 
-          <div class="friend-card" *ngFor="let f of freinds">
+          <div (click)="onClickFreind(f)" class="friend-card" *ngFor="let f of freinds">
             <h4>{{f?.relatedUserName}}</h4>
             <p><i>{{motto}}</i></p>
             <p><b class="score">Total: </b>({{scoreTotal}}) | <b class="score">MLB: </b>({{mlbScore}}) | <b class="score">2020 Presidential: </b>({{presScore}}) |
@@ -43,4 +45,39 @@
           <app-messages></app-messages>
         </div>
     </div>
-    </div>
+    </div> -->
+
+
+    <!-- <div class="rowww dark-border">
+      <div class="columnnn left" style="background-color:#aaa;">
+        
+        <p>Some text..</p>
+      </div>
+      <div class="columnnn right" style="background-color:#bbb;">
+        <h2>Column 2</h2>
+        <p>Some text..</p>
+      </div>
+    </div> -->
+
+
+    
+      <div class='row'>
+        <div class='column left'>
+          <div class='blue-column'>
+            <h2 style="text-align: center;">{{mode}}</h2>
+            <div class="friend-card">
+              <h3>Name</h3>
+              <p>Motto</p>
+              <div>
+                <p><b>Score1:</b> score <b>| Score2:</b> score <b>| Score3:</b> score</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='column right'>
+          <div class='green-column'>
+           <h3>Messages with {{selectedFriend.displayName}}</h3>
+          </div>
+        </div>
+      </div>
+   
