@@ -41,14 +41,17 @@ export class SocialComponent implements OnInit {
 
   onClickFreindMode() {
     this.mode = 'Friends';
+    //onGetMyFriends()
   }
 
   onClickPendingMode() {
     this.mode = 'Pending';
+    //onGetMyPending()
   }
 
   onClickNetworkMode() {
     this.mode = 'Network';
+    //onGetNetwork()
   }
 
   onGetMyFriends() {

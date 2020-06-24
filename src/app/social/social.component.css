@@ -36,11 +36,16 @@ input {
   .blue-column {
     overflow: scroll;
     height: 100%;
+    background-color: #eee;
   }
   
   .green-column {
     overflow: scroll;
     height: 100%;
+    /* background-color: #E0E0E0; */
+    background-color: #404040;
+    padding: 8px;
+    color: white;
   }
 
   .left {
@@ -62,5 +67,42 @@ input {
     background-color: mintcream;
   }
 
+  .me-card {
+    width: 90%;
+    margin: auto;
+    border: 1px solid #C8C8C8;
+    box-shadow: 0 2px 3px #ccc;
+    padding: 6px;
+    text-align: center;
+    background-color: darkgray;
+  }
+
+  .message {
+    width: 75%;
+    border: 2px solid #dedede;
+    /* background-color: #f1f1f1; */
+    background-color: darkgray;
+    border-radius: 5px;
+    padding: 4px;
+    margin: 4px 0;
+  }
+
+  .oth-message {
+    border-color:  #f1f1f1;
+    background-color: rgb(86, 143, 114);
+    margin: 4px 0 4px 25%;
+  }
+
+  textarea {
+      height: 30%;
+  }
+
+
+  hr{
+    height: 1px;
+    background-color: #ccc;
+    border: none;
+}
+  
   
 

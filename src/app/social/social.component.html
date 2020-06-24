@@ -17,6 +17,7 @@
   </button>
 </div>
 <div><input type="text" class="form-control somespace" placeholder="Type to Search"></div>
+<button *ngIf="this.mode == 'Network'" class="btn btn-primary lit-space">Search iNostradamus Network</button>
 
 
   <!-- <div class='row'>
@@ -65,19 +66,38 @@
         <div class='column left'>
           <div class='blue-column'>
             <h2 style="text-align: center;">{{mode}}</h2>
-            <div class="friend-card">
-              <h3>Name</h3>
+            <!-- <hr> -->
+            <!--I think I want to just leave this in the profile for now?-->
+            <!-- <div class="me-card">
+              <h3>Me: </h3>
               <p>Motto</p>
+              <a>Link for modal to popup with a list of active predictions</a>
               <div>
                 <p><b>Score1:</b> score <b>| Score2:</b> score <b>| Score3:</b> score</p>
               </div>
+            </div> -->
+            <hr>
+            <div class="friend-card">
+              <h3>Name</h3>
+              <p>Motto</p>
+              <a>Link for modal to popup with a list of active predictions</a>
+              <div>
+                <p><b>Score1:</b> score <b>| Score2:</b> score <b>| Score3:</b> score</p>
+              </div>
+              <button *ngIf="this.mode == 'Network'" class="btn btn-primary">Send Friend Request</button>
             </div>
           </div>
         </div>
         <div class='column right'>
           <div class='green-column'>
            <h3>Messages with {{selectedFriend.displayName}}</h3>
+           <hr>
+           <div class="message">Test my message</div>
+           <div class="message">Test my message</div>
+           <div class="message oth-message">Test my friend message</div>
           </div>
+          <textarea placeholder="Type message"></textarea>
+          <button class="btn btn-primary">Send Message</button>
         </div>
       </div>
    
