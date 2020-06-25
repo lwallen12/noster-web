@@ -1,4 +1,4 @@
-<h2><i>*In progress, still looking at if I want to do this.</i></h2>
+
 
 <!-- <div>search</div> -->
 <!-- <div class="page-wrapper"> -->
@@ -77,9 +77,9 @@
               </div>
             </div> -->
             <hr>
-            <div class="friend-card">
-              <h3>Name</h3>
-              <p>Motto</p>
+            <div *ngFor="let r of relations" class="friend-card">
+              <h3>{{r.displayName}}</h3><h3 *ngIf="!r.displayName">{{r.relatedUserName}}</h3>
+              <p>{{r.motto}}</p><!--We need to actually relate this to NosterDTO-->
               <a>Link for modal to popup with a list of active predictions</a>
               <div>
                 <p><b>Score1:</b> score <b>| Score2:</b> score <b>| Score3:</b> score</p>
@@ -88,9 +88,9 @@
             </div>
           </div>
         </div>
-        <div class='column right'>
+        <div *ngIf="this.mode == 'Friends'" class='column right'>
           <div class='green-column'>
-           <h3>Messages with {{selectedFriend.displayName}}</h3>
+           <h3>Messages with {{selectedFriend?.displayName}}</h3>
            <hr>
            <div class="message">Test my message</div>
            <div class="message">Test my message</div>

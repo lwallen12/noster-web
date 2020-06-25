@@ -25,9 +25,7 @@ export class SocialComponent implements OnInit {
   mode = 'Friends';
 
   //Get this from a service, this will basically be each freind card
-  freinds: NosterRelation[] = [];
-  pending: NosterRelation[] = [];
-  network: NosterRelation[] = [];
+  relations: NosterRelation[] = [];
   
   //based on the friend selected... these messages should appear in the freind tab
   messages: NosterMessage[] = [];
@@ -41,12 +39,12 @@ export class SocialComponent implements OnInit {
 
   onClickFreindMode() {
     this.mode = 'Friends';
-    //onGetMyFriends()
+    this.onGetMyFriends();
   }
 
   onClickPendingMode() {
     this.mode = 'Pending';
-    //onGetMyPending()
+    this.onGetMyPending();
   }
 
   onClickNetworkMode() {
@@ -57,7 +55,7 @@ export class SocialComponent implements OnInit {
   onGetMyFriends() {
     this.nosterRelationService.getMyFriends().subscribe(
       data =>  {
-        this.freinds = data;
+        this.relations = data;
         console.log(data);
       }
     );
@@ -66,6 +64,12 @@ export class SocialComponent implements OnInit {
   onGetMyPending() {
     //this.nosterRelationService.getMyPending()
     //set my pending property to the data returned
+    this.nosterRelationService.getMyPending().subscribe(
+      data => {
+        this.relations = data;
+        console.log(data);
+      }
+    )
   }
 
   onGetNetwork() {

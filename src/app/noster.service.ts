@@ -3,22 +3,24 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { NosterRelation } from './models/noster-relation';
 import { environment } from 'src/environments/environment';
+import { Noster } from './models/noster';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RelationService {
+export class NosterService {
 
   constructor(private http: HttpClient) { }
 
-  baseURL = environment.apiURL + 'NosterRelations'
+  baseURL = environment.apiURL + 'Nosters'
 
-  getMyFriends(): Observable<NosterRelation[]> {
-    return this.http.get<NosterRelation[]>(this.baseURL);
+  getMyNetwork(search: Search): Observable<Noster[]> {
+    return this.http.post<Noster[]>(this.baseURL + '/search', search)
   }
 
-  getMyPending(): Observable<NosterRelation[]> {
-    return this.http.get<NosterRelation[]>(this.baseURL + '/allpending')
-  }
+  
+}
 
+class Search {
+  public search: string;
 }
