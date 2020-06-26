@@ -16,8 +16,8 @@
     <i class="fa fa-search">Network</i>
   </button>
 </div>
-<div><input type="text" class="form-control somespace" placeholder="Type to Search"></div>
-<button *ngIf="this.mode == 'Network'" class="btn btn-primary lit-space">Search iNostradamus Network</button>
+<div><input type="text" [(ngModel)]="search" class="form-control somespace" placeholder="Type to Search"></div>
+<button (click)="routeSearch()" class="btn btn-primary lit-space">Search {{this.mode}}</button>
 
 
   <!-- <div class='row'>
@@ -77,14 +77,26 @@
               </div>
             </div> -->
             <hr>
-            <div *ngFor="let r of relations" class="friend-card">
-              <h3>{{r.displayName}}</h3><h3 *ngIf="!r.displayName">{{r.relatedUserName}}</h3>
-              <p>{{r.motto}}</p><!--We need to actually relate this to NosterDTO-->
-              <a>Link for modal to popup with a list of active predictions</a>
-              <div>
-                <p><b>Score1:</b> score <b>| Score2:</b> score <b>| Score3:</b> score</p>
+            <div *ngIf="this.mode != 'Network'">
+              <div *ngFor="let r of relations" class="friend-card">
+                <h3>{{r.displayName}}</h3><h3 *ngIf="!r.displayName">{{r.relatedUserName}}</h3>
+                <p>{{r.motto}}</p><!--We need to actually relate this to NosterDTO-->
+                <a>Link for modal to popup with a list of active predictions</a>
+                <div>
+                  <p><b>Score1:</b> score <b>| Score2:</b> score <b>| Score3:</b> score</p>
+                </div>
               </div>
-              <button *ngIf="this.mode == 'Network'" class="btn btn-primary">Send Friend Request</button>
+           </div>
+           <div *ngIf="this.mode == 'Network'">
+              <div *ngFor="let n of nosters" class="friend-card">
+                <h3>{{n.displayName}}</h3><h3 *ngIf="!n.displayName">{{n.userName}}</h3>
+                <p>{{n.motto}}</p><!--We need to actually relate this to NosterDTO-->
+                <a>Link for modal to popup with a list of active predictions</a>
+                <div>
+                  <p><b>Score1:</b> score <b>| Score2:</b> score <b>| Score3:</b> score</p>
+                </div>
+                <button class="btn btn-primary">Send Friend Request</button>
+              </div>
             </div>
           </div>
         </div>

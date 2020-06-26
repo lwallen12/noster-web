@@ -21,6 +21,11 @@ export class NosterService {
   
 }
 
-class Search {
+export class Search {
+
+  constructor(search: string) {
+    this.search = search
+  }
+
   public search: string;
 }

@@ -21,8 +21,9 @@ input {
     flex-wrap: wrap;
     width: 100%;
     height: 70vh;
-    border: 2px solid black;
     padding: 2px;
+    border: 2px solid black;
+    overflow: scroll;
   }
   
   .column {
@@ -59,7 +60,7 @@ input {
   /*friend card*/
   .friend-card {
     width: 90%;
-    margin: auto;
+    margin: 10px auto 10px auto;
     border: 1px solid #C8C8C8;
     box-shadow: 0 2px 3px #ccc;
     padding: 6px;

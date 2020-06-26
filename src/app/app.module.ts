@@ -54,7 +54,7 @@ import { MessagesComponent } from './messages/messages.component';
     ReactiveFormsModule,
     HttpClientModule,
     NgIdleKeepaliveModule.forRoot(),
-    MomentModule,
+    MomentModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, 
     useClass: AuthInterceptor, multi: true}],
