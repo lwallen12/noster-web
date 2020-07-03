@@ -126,9 +126,16 @@ export class SocialComponent implements OnInit {
     )
   }
 
-  onGetMessages() {
-    // this.nosterMessageService.getThisConvo(this.selectedFriend)
-    //set messages = data
+  loadMessages(nosterRelation) {
+    console.log(nosterRelation.relatedUserName);
+    this.nosterMessageService.getThisConvo(nosterRelation.relatedUserName).subscribe(
+      data => {
+        console.log(data);
+      }, error => {
+        console.log("error loading conversation");
+        console.log(error);
+      }
+    )
   }
 
   routeSearch() {

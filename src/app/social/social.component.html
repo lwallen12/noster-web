@@ -78,7 +78,7 @@
             </div> -->
             <hr>
             <div *ngIf="this.mode == 'Friends'">
-              <div *ngFor="let r of relations" class="friend-card">
+              <div (click)="loadMessages(r)" *ngFor="let r of relations" class="friend-card">
                 <h3>{{r.displayName}}</h3><h3 *ngIf="!r.displayName">{{r.relatedUserName}}</h3>
                 <p>{{r.motto}}</p><!--We need to actually relate this to NosterDTO-->
                 <a>Link for modal to popup with a list of active predictions</a>

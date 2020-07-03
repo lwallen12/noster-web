@@ -11,7 +11,7 @@ export class MessageService {
 
   constructor(private http: HttpClient) { }
 
-  private urlBase = environment.apiURL + 'nosterrelations/'
+  private urlBase = environment.apiURL + 'nostermessages/'
 
   getMyMessages(): Observable<NosterMessage>{
     return this.http.get<NosterMessage>(this.urlBase);
@@ -19,6 +19,10 @@ export class MessageService {
 
   getThisConvo(displayName: string): Observable<NosterMessage> {
     return this.http.get<NosterMessage>(this.urlBase + displayName);
+  }
+
+  postMessage() {
+    //TODO
   }
 
 }
