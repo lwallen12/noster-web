@@ -33,7 +33,17 @@ export class SocialComponent implements OnInit {
   nosters: Noster[] = [];
   
   //based on the friend selected... these messages should appear in the freind tab
-  messages: NosterMessage[] = [];
+  messages: NosterMessage[] = [
+    // {
+    //   isSeen: false,
+    //   messageBody: "Howdy",
+    //   nosterTarget: "a.allenwill@gmail.com", 
+    //   targetDisplayName: null, 
+    //   sourceDisplayName: null, 
+    //   source: "william.allen1296@gmail.com", 
+    //   originTime: new Date("2020-05-24T21:31:25.5")
+    //   }
+  ];
 
   onClickFreindItem(relation: NosterRelation) {
     this.selectedFriend = relation.relatedUserName;
@@ -131,6 +141,7 @@ export class SocialComponent implements OnInit {
     this.nosterMessageService.getThisConvo(nosterRelation.relatedUserName).subscribe(
       data => {
         console.log(data);
+        this.messages = data;
       }, error => {
         console.log("error loading conversation");
         console.log(error);

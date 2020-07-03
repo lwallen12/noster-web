@@ -106,9 +106,12 @@
           <div class='green-column'>
            <h3>Messages with {{selectedFriend?.displayName}}</h3>
            <hr>
+           <div *ngFor="let m of messages">
+              <div>{{m.messageBody}}</div>
+           </div>
+           <!-- <div class="message">Test my message</div>
            <div class="message">Test my message</div>
-           <div class="message">Test my message</div>
-           <div class="message oth-message">Test my friend message</div>
+           <div class="message oth-message">Test my friend message</div> -->
           </div>
           <textarea placeholder="Type message"></textarea>
           <button class="btn btn-primary">Send Message</button>
