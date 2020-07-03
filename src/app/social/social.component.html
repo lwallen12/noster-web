@@ -77,7 +77,7 @@
               </div>
             </div> -->
             <hr>
-            <div *ngIf="this.mode != 'Network'">
+            <div *ngIf="this.mode == 'Friends'">
               <div *ngFor="let r of relations" class="friend-card">
                 <h3>{{r.displayName}}</h3><h3 *ngIf="!r.displayName">{{r.relatedUserName}}</h3>
                 <p>{{r.motto}}</p><!--We need to actually relate this to NosterDTO-->
@@ -87,7 +87,7 @@
                 </div>
               </div>
            </div>
-           <div *ngIf="this.mode == 'Network'">
+           <div *ngIf="this.mode != 'Friends'">
               <div *ngFor="let n of nosters" class="friend-card">
                 <h3>{{n.displayName}}</h3><h3 *ngIf="!n.displayName">{{n.userName}}</h3>
                 <p>{{n.motto}}</p><!--We need to actually relate this to NosterDTO-->
@@ -95,7 +95,9 @@
                 <div>
                   <p><b>Score1:</b> score <b>| Score2:</b> score <b>| Score3:</b> score</p>
                 </div>
-                <button class="btn btn-primary">Send Friend Request</button>
+                <button *ngIf="this.mode == 'Network'" (click)="onSendFriendReq(n)" class="btn btn-primary">Send Friend Request</button>
+                  <button *ngIf="this.mode == 'Pending'" (click)="onConfirm(n)" class="btn btn-primary lit-space">Confirm</button>
+                  <button *ngIf="this.mode == 'Pending'" (click)="onDeny(n)" class="btn btn-danger lit-space">Deny</button>
               </div>
             </div>
           </div>

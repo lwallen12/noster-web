@@ -5,7 +5,7 @@ import { NosterMessage } from '../models/noster-message';
 import { MessageService } from '../message.service';
 import { NosterService, Search } from '../noster.service';
 import { Noster } from '../models/noster';
-import { FormsModule } from '@angular/forms'
+
 
 @Component({
   selector: 'app-social',
@@ -71,7 +71,7 @@ export class SocialComponent implements OnInit {
     //set my pending property to the data returned
     this.nosterRelationService.getMyPending().subscribe(
       data => {
-        this.relations = data;
+        this.nosters = data;
         console.log(data);
       }
     )
@@ -87,6 +87,41 @@ export class SocialComponent implements OnInit {
       data => {
         this.nosters = data;
         console.log(data);
+      }
+    )
+  }
+
+  onSendFriendReq(nosterRel: NosterRelation) {
+    console.log(nosterRel);
+    this.nosterRelationService.sendFriendReq(nosterRel).subscribe(
+      data => {
+        console.log(data);
+      }, error => {
+        console.log("error on sendFriendReq");
+        console.log(error);
+      }
+    )
+  }
+
+  onConfirm(noster: Noster) {
+    console.log(noster);
+    this.nosterRelationService.confirmFriendReq(noster).subscribe(
+      data => {
+        console.log(data);
+      }, error => {
+        console.log("error on confirm friend");
+        console.log(error);
+      }
+    )
+  }
+
+  onDeny(noster: Noster) {
+    this.nosterRelationService.denyFriendReq(noster).subscribe(
+      data => {
+        console.log(data);
+      }, error => {
+        console.log("error on onDeny() Friend");
+        console.log(error);
       }
     )
   }

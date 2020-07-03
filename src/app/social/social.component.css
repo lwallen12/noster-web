@@ -105,5 +105,9 @@ input {
     border: none;
 }
   
+.spaced {
+  padding: 4px;
+  margin: 20%;
+}
   
 
